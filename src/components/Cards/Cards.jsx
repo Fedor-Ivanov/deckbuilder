@@ -6,8 +6,6 @@ import Card from '../Card/Card';
 
 function Cards({ cards }) {
 
-	console.log(cards)
-
 	return (
 		<div className='cards'>
 			{cards.map(card => (
