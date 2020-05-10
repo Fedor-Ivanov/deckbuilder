@@ -8,9 +8,7 @@ import Deck from '../Deck/Deck'
 function Builder() {
 	return (
 		<div className='builder'>
-			<Filters>
 
-			</Filters>
 			<Cards className='cards'>
 
 			</Cards>

@@ -2,21 +2,47 @@ import { } from '../actions/filters';
 import data from '../../data/cardlist-v6.2.0.json'
 
 
-
+//----------------- type
 let allTypes = data.map(item => (
     item.type
 ))
-
-let types = allTypes.filter(function (item, pos) {
+let type = allTypes.filter(function (item, pos) {
     return allTypes.indexOf(item) === pos;
 })
 
-console.log(types)
+//----------------- provision
+let allProvisions = data.map(item => (
+    item.provision
+))
+let provisionArr = allProvisions.filter(function (item, pos) {
+    return allProvisions.indexOf(item) === pos;
+})
+let provision = provisionArr.sort(function (a, b) {
+    return a - b
+})
+
+//----------------- faction
+let allFaction = data.map(item => (
+    item.faction
+))
+let faction = allFaction.filter(function (item, pos) {
+    return allFaction.indexOf(item) === pos;
+})
+
+//----------------- rarity
+let allRarity = data.map(item => (
+    item.rarity
+))
+let rarity = allRarity.filter(function (item, pos) {
+    return allRarity.indexOf(item) === pos;
+})
 
 const initialState = {
-    filters: {
-        types: types
-    }
+    type: type,
+    provision: provision,
+    faction: faction,
+    rarity: rarity
+
 };
 
 export default function (state = initialState, { type, payload }) {
