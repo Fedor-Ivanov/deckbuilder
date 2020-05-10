@@ -1,0 +1,5 @@
+.builder {
+    display: grid;
+    grid-template-areas: 'filters filters' 'cards deck';
+    grid-gap: 50px;
+}

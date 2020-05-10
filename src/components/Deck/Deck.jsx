@@ -1,8 +1,9 @@
 import React from 'react'
+import './deck.css'
 
 function Deck() {
 	return (
-		<div>
+		<div className='deck'>
 			Deck
 		</div>
 	)

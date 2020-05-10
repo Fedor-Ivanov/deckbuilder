@@ -1,6 +1,7 @@
 import React from 'react'
+import './cards.css'
 import { connect } from 'react-redux';
-import Card from './Card';
+import Card from '../Card/Card';
 
 
 function Cards({ cards }) {
@@ -8,7 +9,7 @@ function Cards({ cards }) {
 	console.log(cards)
 
 	return (
-		<div>
+		<div className='cards'>
 			{cards.map(card => (
 				<Card
 					key={card.id}
