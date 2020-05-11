@@ -8,6 +8,7 @@ function Cards({ cards }) {
 
 	return (
 		<div className='cards'>
+			<div>{cards.length}</div>
 			{cards.map(card => (
 				<Card
 					key={card.id}
@@ -18,9 +19,14 @@ function Cards({ cards }) {
 	)
 }
 
-function mapStateToProps({ cards }) {
+function mapStateToProps({ cards, filters }) {
 	return {
-		cards: cards.cards
+		cards:
+			filters.selectedType == '' ? cards.cards : cards.cards.filter(item => item.type == filters.selectedType),
+		selectedType: filters.selectedType,
+		selectedProvision: filters.selectedProvision,
+		selectedFaction: filters.selectedFaction,
+		selectedRarity: filters.selectedRarity
 	};
 }
 

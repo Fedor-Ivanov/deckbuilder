@@ -1,4 +1,4 @@
-import { } from '../actions/filters';
+import { ACTION_FILTER_SELECT } from '../actions/filters';
 import data from '../../data/cardlist-v6.2.0.json'
 
 
@@ -37,16 +37,28 @@ let rarity = allRarity.filter(function (item, pos) {
     return allRarity.indexOf(item) === pos;
 })
 
+
 const initialState = {
     type: type,
     provision: provision,
     faction: faction,
-    rarity: rarity
+    rarity: rarity,
+    selectedType: '',
+    selectedProvision: '',
+    selectedFaction: '',
+    selectedRarity: ''
 
 };
 
 export default function (state = initialState, { type, payload }) {
     switch (type) {
+
+        case ACTION_FILTER_SELECT:
+
+            return {
+                ...state,
+                selectedType: payload
+            };
 
         default:
             return state;
