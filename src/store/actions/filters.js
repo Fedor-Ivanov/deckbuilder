@@ -7,9 +7,9 @@ export function selectFilter(value, filter) {
 }
 
 export const ACTION_FILTER_RESET = 'ACTION_FILTER_RESET';
-export function resetFilters(value) {
+export function resetFilters() {
     return {
         type: ACTION_FILTER_RESET,
-        payload: value
+        // payload: value
     };
 }

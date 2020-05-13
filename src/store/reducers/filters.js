@@ -70,7 +70,13 @@ export default function (state = initialState, { type, payload }) {
 
             return {
                 ...state,
-                selected: ''
+                selected: {
+                    ...state.selected,
+                    type: '',
+                    provision: '',
+                    rarity: '',
+                    faction: ''
+                }
             }
 
         default:

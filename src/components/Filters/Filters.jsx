@@ -7,6 +7,10 @@ import { selectFilter, resetFilters } from '../../store/actions/filters'
 
 function Filters({ type, provision, faction, rarity, selectedType, selectedProvision, selectedFaction, selectedRarity, onSelect, onReset }) {
 
+	function onResetClick() {
+		onReset();
+	}
+
 	return (
 		<div className='filters'>
 
@@ -35,7 +39,7 @@ function Filters({ type, provision, faction, rarity, selectedType, selectedProvi
 				})}
 			</select>
 
-			<button onClick={onReset}>reset filters</button>
+			<button onClick={onResetClick}>reset filters</button>
 
 		</div>
 	)
@@ -47,10 +51,10 @@ function mapStateToProps({ filters }) {
 		provision: filters.provision,
 		faction: filters.faction,
 		rarity: filters.rarity,
-		selectedType: filters.selectedType,
-		selectedProvision: filters.selectedProvision,
-		selectedFaction: filters.selectedFaction,
-		selectedRarity: filters.selectedRarity
+		selectedType: filters.selected.type,
+		selectedProvision: filters.selected.provision,
+		selectedFaction: filters.selected.faction,
+		selectedRarity: filters.selected.rarity
 
 
 	};
@@ -60,7 +64,6 @@ const mapDispatchToProps = {
 
 	onSelect: selectFilter,
 	onReset: resetFilters
-
 
 };
 
