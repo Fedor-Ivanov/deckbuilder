@@ -57,15 +57,6 @@ export default function (state = initialState, { type, payload }) {
 
         case ACTION_FILTER_SELECT:
 
-            let filtered = {
-                type: '',
-                provision: '',
-                rarity: '',
-                faction: ''
-            }
-
-            filtered[payload.name] = payload.value
-
             return {
                 ...state,
                 selected: {
