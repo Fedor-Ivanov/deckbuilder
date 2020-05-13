@@ -1,4 +1,4 @@
-import { ACTION_FILTER_SELECT, selectFilter } from '../actions/filters';
+import { ACTION_FILTER_SELECT, ACTION_FILTER_RESET } from '../actions/filters';
 import data from '../../data/cardlist-v6.2.0.json'
 
 
@@ -65,6 +65,13 @@ export default function (state = initialState, { type, payload }) {
                 }
 
             };
+
+        case ACTION_FILTER_RESET:
+
+            return {
+                ...state,
+                selected: ''
+            }
 
         default:
             return state;

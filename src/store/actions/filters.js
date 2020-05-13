@@ -5,3 +5,11 @@ export function selectFilter(value, filter) {
         payload: { name: filter, value: value }
     };
 }
+
+export const ACTION_FILTER_RESET = 'ACTION_FILTER_RESET';
+export function resetFilters(value) {
+    return {
+        type: ACTION_FILTER_RESET,
+        payload: value
+    };
+}

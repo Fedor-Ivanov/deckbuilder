@@ -1,11 +1,11 @@
 import React from 'react'
 import './filters.css'
 import { connect } from 'react-redux';
-import { selectFilter } from '../../store/actions/filters'
+import { selectFilter, resetFilters } from '../../store/actions/filters'
 
 
 
-function Filters({ type, provision, faction, rarity, selectedType, selectedProvision, selectedFaction, selectedRarity, onSelect }) {
+function Filters({ type, provision, faction, rarity, selectedType, selectedProvision, selectedFaction, selectedRarity, onSelect, onReset }) {
 
 	return (
 		<div className='filters'>
@@ -35,6 +35,8 @@ function Filters({ type, provision, faction, rarity, selectedType, selectedProvi
 				})}
 			</select>
 
+			<button onClick={onReset}>reset filters</button>
+
 		</div>
 	)
 }
@@ -56,7 +58,8 @@ function mapStateToProps({ filters }) {
 
 const mapDispatchToProps = {
 
-	onSelect: selectFilter
+	onSelect: selectFilter,
+	onReset: resetFilters
 
 
 };
