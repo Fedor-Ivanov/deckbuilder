@@ -1,4 +1,4 @@
-import { ACTION_FILTER_SELECT } from '../actions/filters';
+import { ACTION_FILTER_SELECT, selectFilter } from '../actions/filters';
 import data from '../../data/cardlist-v6.2.0.json'
 
 
@@ -43,12 +43,23 @@ const initialState = {
     provision: provision,
     faction: faction,
     rarity: rarity,
-    selectedType: '',
-    selectedProvision: '',
-    selectedFaction: '',
-    selectedRarity: ''
+    selected: {
+        type: '',
+        provision: '',
+        rarity: '',
+        faction: ''
+    }
+    // selectedType: '',
+    // selectedProvision: '',
+    // selectedFaction: '',
+    // selectedRarity: ''
 
 };
+
+function setFilter(list, data) {
+    console.log(list)
+    console.log(data)
+}
 
 export default function (state = initialState, { type, payload }) {
     switch (type) {
@@ -57,7 +68,7 @@ export default function (state = initialState, { type, payload }) {
 
             return {
                 ...state,
-                selectedType: payload
+                selected: setFilter(state.selected, payload)
             };
 
         default:
