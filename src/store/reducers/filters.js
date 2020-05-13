@@ -51,7 +51,6 @@ const initialState = {
     }
 };
 
-const filter = (db, keys) => keys.reduce((a, key) => (a[key] = db[key], a), {});
 
 export default function (state = initialState, { type, payload }) {
     switch (type) {
