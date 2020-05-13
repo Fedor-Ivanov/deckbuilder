@@ -10,25 +10,25 @@ function Filters({ type, provision, faction, rarity, selectedType, selectedProvi
 	return (
 		<div className='filters'>
 
-			<select value={selectedType} onChange={({ target }) => onSelect(target.value)} >
+			<select value={selectedType} name='type' onChange={({ target }) => onSelect(target.value, target.name)} >
 				<option value='' >All</option>
 				{type.map(item => {
 					return <option key={item}>{item}</option>
 				})}
 			</select>
-			<select value={selectedProvision} onChange={({ target }) => onSelect(target.value)} >
+			<select value={selectedProvision} name='provision' onChange={({ target }) => onSelect(target.value, target.name)} >
 				<option value='' >All</option>
 				{provision.map(item => {
 					return <option key={item}>{item}</option>
 				})}
 			</select>
-			<select value={selectedFaction} onChange={({ target }) => onSelect(target.value)} >
+			<select value={selectedFaction} name='faction' onChange={({ target }) => onSelect(target.value, target.name)} >
 				<option value='' >All</option>
 				{faction.map(item => {
 					return <option key={item}>{item}</option>
 				})}
 			</select>
-			<select value={selectedRarity} onChange={({ target }) => onSelect(target.value)} >
+			<select value={selectedRarity} name='rarity' onChange={({ target }) => onSelect(target.value, target.name)} >
 				<option value='' >All</option>
 				{rarity.map(item => {
 					return <option key={item}>{item}</option>

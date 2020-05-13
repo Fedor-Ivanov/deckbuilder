@@ -21,14 +21,11 @@ function Cards({ cards }) {
 
 function mapStateToProps({ cards, filters }) {
 
-	console.log(filters.selected)
-
 	const multiPropsFilter = (products, filters) => {
 		const filterKeys = Object.keys(filters);
 		return products.filter(product => {
 			return filterKeys.every(key => {
 				if (!filters[key].length) return true;
-				// Loops again if product[key] is an array (for material attribute).
 				if (Array.isArray(product[key])) {
 					return product[key].some(keyEle => filters[key].includes(keyEle));
 				}
@@ -38,17 +35,11 @@ function mapStateToProps({ cards, filters }) {
 	};
 
 	return {
-		// cards:
-		// 	filters.selectedType == '' ? cards.cards : cards.cards.filter(item => item.type == filters.selectedType),
-
-		// cards: Object.values(filters.selected) == '' ? cards.cards : multiPropsFilter(cards.cards, filters.selected),
-
-		cards: cards.cards,
-
-		selectedType: filters.selectedType,
-		selectedProvision: filters.selectedProvision,
-		selectedFaction: filters.selectedFaction,
-		selectedRarity: filters.selectedRarity
+		cards: Object.values(filters.selected) == '' ? cards.cards : multiPropsFilter(cards.cards, filters.selected),
+		selectedType: filters.selected.type,
+		selectedProvision: filters.selected.provision,
+		selectedFaction: filters.selected.faction,
+		selectedRarity: filters.selected.rarity
 	};
 }
 
