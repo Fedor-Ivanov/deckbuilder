@@ -68,7 +68,10 @@ export default function (state = initialState, { type, payload }) {
 
             return {
                 ...state,
-                selected: filtered
+                selected: {
+                    ...state.selected,
+                    [payload.name]: payload.value
+                }
 
             };
 
