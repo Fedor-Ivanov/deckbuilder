@@ -4,7 +4,11 @@ import './card.css'
 function Card({ card }) {
     return (
         <div className='card'>
-            {card.name}
+            <div className='card__name'>{card.name}</div>
+            <div className='card__category'>{card.category}</div>
+            <div className='card__ability'>{card.ability}</div>
+            <div className='card__flavor'>{card.flavor}</div>
+
         </div>
     )
 }
