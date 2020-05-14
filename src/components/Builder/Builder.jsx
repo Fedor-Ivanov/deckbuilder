@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 function Builder({ cards }) {
 	return (
 		<div className='builder'>
-
+			hello
 			<Cards className='cards' cards={cards}>
 
 			</Cards>
