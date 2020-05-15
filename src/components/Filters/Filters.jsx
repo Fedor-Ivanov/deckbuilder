@@ -2,10 +2,16 @@ import React from 'react'
 import './filters.css'
 import { connect } from 'react-redux';
 import { selectFilter, resetFilters } from '../../store/actions/filters'
+import { useEffect } from 'react';
 
 
 
 function Filters({ type, provision, faction, rarity, selectedType, selectedProvision, selectedFaction, selectedRarity, onSelect, onReset }) {
+
+
+	useEffect(() => {
+		onReset()
+	}, [])
 
 	function onResetClick() {
 		onReset();

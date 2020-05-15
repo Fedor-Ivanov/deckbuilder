@@ -1,4 +1,7 @@
-import { ACTION_FILTER_SELECT, ACTION_FILTER_RESET } from '../actions/filters';
+import { ACTION_FILTER_SELECT,
+    ACTION_FILTER_RESET,
+    ACTION_SELECT_DECK_FACTION,
+    ACTION_SELECT_DECK_LEADER } from '../actions/filters';
 import data from '../../data/cardlist-v6.2.0.json'
 
 
@@ -37,17 +40,31 @@ let rarity = allRarity.filter(function (item, pos) {
     return allRarity.indexOf(item) === pos;
 })
 
+//----------------- category: leader
+let leaders = [];
+let category = data.map(function(item) {
+    if (item.category == 'Leader') {
+        leaders.push(item)
+    }
+})
+
 
 const initialState = {
     type: type,
     provision: provision,
     faction: faction,
     rarity: rarity,
+    leaders: leaders,
     selected: {
         type: '',
         provision: '',
         rarity: '',
         faction: ''
+    },
+    deckSelect: {
+        faction: '',
+        leader: ''
+
     }
 };
 
@@ -78,6 +95,27 @@ export default function (state = initialState, { type, payload }) {
                     faction: ''
                 }
             }
+
+        case ACTION_SELECT_DECK_FACTION:
+
+            return {
+                ...state,
+                deckSelect: {
+                    ...state.deckSelect,
+                    faction: payload
+                }
+            }
+
+        case ACTION_SELECT_DECK_LEADER:
+
+            return {
+                ...state,
+                deckSelect: {
+                    ...state.deckSelect,
+                    leader: payload
+                }
+            }
+
 
         default:
             return state;
