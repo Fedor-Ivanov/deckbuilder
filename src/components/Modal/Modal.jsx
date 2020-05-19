@@ -1,30 +1,44 @@
 import React from 'react'
 import './modal.css'
 import { connect } from 'react-redux';
-import { selectDeck, selectLeader } from '../../store/actions/filters'
+import { selectDeck, selectLeader, resetSelectedDeck } from '../../store/actions/filters'
+import { useHistory } from 'react-router-dom';
 
 
 
-function Modal({ onToggleModal, faction, deckFaction, onSelectDeckFaction, leaders, deckLeader, onSelectDeckLeader }) {
+function Modal({ onToggleModal, faction, deckFaction, onSelectDeckFaction, leaders, deckLeader, onSelectDeckLeader, onResetSelectedDeck }) {
+
+    const history = useHistory();
+
+    function onCloseClick() {
+        onResetSelectedDeck()
+        onToggleModal()
+        history.push('/builder')
+    }
 
     return (
         <div style={backdropStyle}>
             <div style={modalStyle}>
+
                 <select value={deckFaction} name='faction' onChange={({ target }) => onSelectDeckFaction(target.value)} >
-                <option value=''>choose faction</option>
+                    <option value=''>choose faction</option>
                     {faction.map(item => {
                         return <option key={item}>{item}</option>
                     })}
                 </select>
 
                 <select value={deckLeader} name='leader' onChange={({ target }) => onSelectDeckLeader(target.value)} >
-                <option value=''>choose leader</option>
+                    <option value=''>choose leader</option>
                     {leaders.map(item => {
                         return <option key={item.id}>{item.name}</option>
                     })}
                 </select>
 
-                <button style={closeBtn} onClick={onToggleModal}>close</button>
+                {
+                    deckFaction && deckLeader && <button style={closeBtn} onClick={onToggleModal}>done</button>
+                }
+
+                <button style={closeBtn} onClick={onCloseClick}>close</button>
             </div>
         </div>
     )
@@ -71,22 +85,21 @@ function mapStateToProps({ filters }) {
         return array
     }
 
-    console.log(filters.deckSelect.faction);
+    return {
 
-	return {
-		
-		deckFaction: filters.deckSelect.faction,
+        deckFaction: filters.deckSelect.faction,
         faction: playeble(filters.faction),
         deckLeader: filters.deckSelect.leader,
         leaders: filters.deckSelect.faction == '' ? filters.leaders : filters.leaders.filter(item => item.faction == filters.deckSelect.faction)
 
-	};
+    };
 }
 
 const mapDispatchToProps = {
 
     onSelectDeckFaction: selectDeck,
-    onSelectDeckLeader: selectLeader
+    onSelectDeckLeader: selectLeader,
+    onResetSelectedDeck: resetSelectedDeck,
 
 
 };

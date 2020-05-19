@@ -28,3 +28,10 @@ export function selectLeader(value) {
         payload: value
     };
 }
+
+export const ACTION_SELECT_DECK_RESET = 'ACTION_SELECT_DECK_RESET';
+export function resetSelectedDeck() {
+    return {
+        type: ACTION_SELECT_DECK_RESET,
+    };
+}
