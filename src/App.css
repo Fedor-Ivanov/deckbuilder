@@ -1,4 +1,12 @@
+@font-face {
+  font-family: 'CarterOne';
+  font-style: normal;
+  font-weight: normal;
+  src: local('CarterOne'), url('./fonts/CarterOne-Regular.ttf') format('truetype');
+}
+
 .link {
+  font-family: 'CarterOne';
   padding: 20px;
   color: #666;
 }
@@ -6,3 +14,4 @@
 .link_active {
   color: red;
 }
+

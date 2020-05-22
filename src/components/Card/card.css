@@ -2,6 +2,7 @@
     position: relative;
     height: 357px;
     width: 249px;
+    font-family: 'CarterOne'
 }
 
 .card-img {
@@ -43,4 +44,45 @@
     position: absolute;
     bottom: 64px;
     right: 7px;
+}
+
+.card-provision-value {
+    position: absolute;
+    width: 49px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    bottom: 8px;
+    right: 7px;
+    z-index: 100;
+    font-size: 35px;
+    color: aliceblue;
+    background: linear-gradient(to top, #fceabb, #f8b500); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.card-power-value {
+    position: absolute;
+    width: 65px;
+    height: 69px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0px;
+    left: 0px;
+    z-index: 100;
+    font-size: 35px;
+    color: aliceblue;
+    background: linear-gradient(to top, #ada996, #f2f2f2, #dbdbdb, #eaeaea); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.card-type {
+    position: absolute;
+    width: 17%;
+    top: 11px;
+    left: 11px;
 }
