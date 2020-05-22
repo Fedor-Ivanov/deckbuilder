@@ -1,4 +1,46 @@
 .card {
-    border: 1px solid #333;
+    position: relative;
+    height: 357px;
     width: 249px;
+}
+
+.card-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.card-border {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.card-banner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 26%;
+}
+
+.card-rarity {
+    position: absolute;
+    top: 7px;
+    left: 7px;
+}
+
+.card-provision {
+    position: absolute;
+    bottom: 7px;
+    right: 7px;
+}
+
+.card-provision-icon {
+    position: absolute;
+    bottom: 64px;
+    right: 7px;
 }
