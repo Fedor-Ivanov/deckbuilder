@@ -1,12 +1,13 @@
 @font-face {
-  font-family: 'CarterOne';
+  font-family: 'gwent';
   font-style: normal;
   font-weight: normal;
-  src: local('CarterOne'), url('./fonts/CarterOne-Regular.ttf') format('truetype');
+  src: local('CarterOne'), url('./fonts/gwent.ttf') format('truetype');
 }
 
+
 .link {
-  font-family: 'CarterOne';
+  font-family: 'gwent';
   padding: 20px;
   color: #666;
 }
