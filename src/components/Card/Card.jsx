@@ -1,7 +1,11 @@
 import React from 'react'
 import './card.css'
+import { connect } from 'react-redux';
+import { cardAdd } from '../../store/actions/deck'
 
-function Card({ card }) {
+
+
+function Card({ card, onCardAdd }) {
 
     const test = {
         color: 'red',
@@ -10,7 +14,7 @@ function Card({ card }) {
 
 
     return (
-        <div className='card'>
+        <div className='card' onClick={() => onCardAdd(card)}>
 
             {/* img */}
             {<img className='card-img' src={require(`../../images/cards/${card.artid}.jpg`)} alt="card" />}
@@ -99,13 +103,13 @@ function Card({ card }) {
             }
 
             {/* type */}
-            {card.type == 'Special' &&
+            {card.type === 'Special' &&
                 <img className='card-type' src={require(`../../images/trinket/trinket-spell.png`)} alt="" />
             }
-            {card.type == 'Artifact' &&
+            {card.type === 'Artifact' &&
                 <img className='card-type' src={require(`../../images/trinket/trinket-artifact.png`)} alt="" />
             }
-            {card.type == 'Stratagem' &&
+            {card.type === 'Stratagem' &&
                 <img className='card-type' src={require(`../../images/trinket/trinket-stratagem.png`)} alt="" />
             }
 
@@ -114,4 +118,15 @@ function Card({ card }) {
     )
 }
 
-export default Card
+function mapStateToProps({ cards }) {
+
+    return {
+
+    };
+}
+
+const mapDispatchToProps = {
+    onCardAdd: cardAdd
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Card)

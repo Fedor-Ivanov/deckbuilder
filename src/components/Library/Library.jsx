@@ -1,14 +1,19 @@
-import React from 'react'
+import React, { Suspense } from 'react';
 import Filters from '../Filters/Filters'
-import Cards from '../Cards/Cards'
+// import Cards from '../Cards/Cards'
 import { connect } from 'react-redux';
+
+const Cards = React.lazy(() => import('../Cards/Cards'));
 
 
 function Library({ cards }) {
     return (
         <div>
             <Filters></Filters>
-            <Cards cards={cards}></Cards>
+            <Suspense fallback={<div>Loading...</div>}>
+                <Cards cards={cards}></Cards>
+            </Suspense>
+
         </div>
     )
 }
@@ -29,11 +34,7 @@ function mapStateToProps({ cards, filters }) {
     };
 
     return {
-        cards: Object.values(filters.selected) == '' ? cards.cards : multiPropsFilter(cards.cards, filters.selected),
-        // selectedType: filters.selected.type,
-        // selectedProvision: filters.selected.provision,
-        // selectedFaction: filters.selected.faction,
-        // selectedRarity: filters.selected.rarity
+        cards: Object.values(filters.selected) === '' ? cards.cards : multiPropsFilter(cards.cards, filters.selected),
     };
 }
 

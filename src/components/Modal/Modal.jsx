@@ -90,7 +90,7 @@ function mapStateToProps({ filters }) {
         deckFaction: filters.deckSelect.faction,
         faction: playeble(filters.faction),
         deckLeader: filters.deckSelect.leader,
-        leaders: filters.deckSelect.faction == '' ? filters.leaders : filters.leaders.filter(item => item.faction == filters.deckSelect.faction)
+        leaders: filters.deckSelect.faction === '' ? filters.leaders : filters.leaders.filter(item => item.faction === filters.deckSelect.faction)
 
     };
 }

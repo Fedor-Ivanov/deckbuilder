@@ -1,33 +1,29 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import './cards.css'
-// import Card from '../Card/Card';
+import Card from '../Card/Card';
 import { cardsIsLoading } from '../../store/actions/cards'
 import { connect } from 'react-redux';
-
-const Card = React.lazy(() => import('../Card/Card'));
 
 
 function Cards({ cards, isLoading }) {
 
 	return (
-		<>
+		<div>
+
 			<div>{cards.length}</div>
 
 			<div className='cards'>
 
 				{cards.map(card => (
-					<Suspense fallback={<div>Загрузка...</div>}>
-						<Card
-							key={card.id}
-							card={card}
-						></Card>
-					</Suspense>
+					<Card
+						key={card.id}
+						card={card}
+					></Card>
 				))}
 
 			</div>
 
-
-		</>
+		</div>
 	)
 }
 

@@ -9,6 +9,7 @@ import { Switch, Route, useRouteMatch, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 
+
 function Builder({ cards, isVisible, onToggleModal, selectedFaction, selectedLeader, onResetSelectedDeck }) {
 
 	const { path, url } = useRouteMatch();
@@ -28,12 +29,12 @@ function Builder({ cards, isVisible, onToggleModal, selectedFaction, selectedLea
 				<Route exact path={`${path}/new`}>
 					{
 						selectedFaction && selectedLeader && !isVisible &&
-						<>
+						<div className='wrap'>
 							<Cards className='cards' cards={cards}>
 							</Cards>
 							<Deck className='deck'>
 							</Deck>
-						</>
+						</div>
 					}
 				</Route>
 
@@ -45,7 +46,7 @@ function Builder({ cards, isVisible, onToggleModal, selectedFaction, selectedLea
 function mapStateToProps({ cards, filters, modal }) {
 
 	return {
-		cards: cards.cards.filter(item => item.faction == 'Neutral').concat(cards.cards.filter(item => item.faction == filters.deckSelect.faction)),
+		cards: cards.cards.filter(item => item.faction === 'Neutral').concat(cards.cards.filter(item => item.faction === filters.deckSelect.faction)),
 		isVisible: modal.isVisible,
 		selectedFaction: filters.deckSelect.faction,
 		selectedLeader: filters.deckSelect.leader,

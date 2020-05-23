@@ -1,12 +1,33 @@
 import React from 'react'
 import './deck.css'
+import { connect } from 'react-redux';
 
-function Deck() {
+
+
+function Deck({ deck }) {
+
+	console.log(deck)
+
 	return (
 		<div className='deck'>
-			Deck
+			{deck.map(card => (
+
+				<div key={card.id}>{card.name}</div>
+
+			))}
 		</div>
 	)
 }
 
-export default Deck
+function mapStateToProps({ deck }) {
+
+	return {
+		deck: deck.deck
+	};
+}
+
+const mapDispatchToProps = {
+
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Deck)
