@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { Suspense } from 'react';
 import './cards.css'
-import Card from '../Card/Card';
+// import Card from '../Card/Card';
 import { cardsIsLoading } from '../../store/actions/cards'
-
 import { connect } from 'react-redux';
+
+const Card = React.lazy(() => import('../Card/Card'));
 
 
 function Cards({ cards, isLoading }) {
@@ -12,24 +13,19 @@ function Cards({ cards, isLoading }) {
 		<>
 			<div>{cards.length}</div>
 
-			{
-				cards ?
+			<div className='cards'>
 
-					<div className='cards'>
+				{cards.map(card => (
+					<Suspense fallback={<div>Загрузка...</div>}>
+						<Card
+							key={card.id}
+							card={card}
+						></Card>
+					</Suspense>
+				))}
 
-						{cards.map(card => (
-							<Card
-								key={card.id}
-								card={card}
-							></Card>
-						))}
-					</div>
+			</div>
 
-					:
-
-					'loading'
-
-			}
 
 		</>
 	)
