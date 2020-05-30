@@ -2,11 +2,12 @@ import React from 'react'
 import './modal.css'
 import { connect } from 'react-redux';
 import { selectDeck, selectLeader, resetSelectedDeck } from '../../store/actions/filters'
+import { setDeckFaction, setDeckLeader } from '../../store/actions/deck'
 import { useHistory } from 'react-router-dom';
 
 
 
-function Modal({ onToggleModal, faction, deckFaction, onSelectDeckFaction, leaders, deckLeader, onSelectDeckLeader, onResetSelectedDeck }) {
+function Modal({ onToggleModal, faction, deckFaction, onSelectDeckFaction, leaders, deckLeader, onSelectDeckLeader, onResetSelectedDeck, setDeckFaction, setDeckLeader }) {
 
     const history = useHistory();
 
@@ -16,18 +17,28 @@ function Modal({ onToggleModal, faction, deckFaction, onSelectDeckFaction, leade
         history.push('/builder')
     }
 
+    function chooseFaction(faction) {
+        onSelectDeckFaction(faction);
+        setDeckFaction(faction);
+    }
+
+    function chooseLeader(leader) {
+        onSelectDeckLeader(leader);
+        setDeckLeader(leader);
+    }
+
     return (
         <div style={backdropStyle}>
             <div style={modalStyle}>
 
-                <select value={deckFaction} name='faction' onChange={({ target }) => onSelectDeckFaction(target.value)} >
+                <select value={deckFaction} name='faction' onChange={({ target }) => chooseFaction(target.value)} >
                     <option value=''>choose faction</option>
                     {faction.map(item => {
                         return <option key={item}>{item}</option>
                     })}
                 </select>
 
-                <select value={deckLeader} name='leader' onChange={({ target }) => onSelectDeckLeader(target.value)} >
+                <select value={deckLeader} name='leader' onChange={({ target }) => chooseLeader(target.value)} >
                     <option value=''>choose leader</option>
                     {leaders.map(item => {
                         return <option key={item.id}>{item.name}</option>
@@ -74,7 +85,7 @@ const closeBtn = {
     marginTop: 10
 };
 
-function mapStateToProps({ filters }) {
+function mapStateToProps({ filters, deck }) {
 
     function playeble(arr) {
         var array = arr;
@@ -90,7 +101,9 @@ function mapStateToProps({ filters }) {
         deckFaction: filters.deckSelect.faction,
         faction: playeble(filters.faction),
         deckLeader: filters.deckSelect.leader,
-        leaders: filters.deckSelect.faction === '' ? filters.leaders : filters.leaders.filter(item => item.faction === filters.deckSelect.faction)
+        leaders: filters.deckSelect.faction === '' ? filters.leaders : filters.leaders.filter(item => item.faction === filters.deckSelect.faction),
+        // setDeckFaction: deck.deckFaction,
+        // setDeckLeader: deck.deckLeader
 
     };
 }
@@ -100,6 +113,8 @@ const mapDispatchToProps = {
     onSelectDeckFaction: selectDeck,
     onSelectDeckLeader: selectLeader,
     onResetSelectedDeck: resetSelectedDeck,
+    setDeckFaction: setDeckFaction,
+    setDeckLeader: setDeckLeader
 
 
 };

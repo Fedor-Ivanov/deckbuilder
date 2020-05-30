@@ -3,26 +3,35 @@ import './deck.css'
 import { connect } from 'react-redux';
 
 
+function Deck({ deck, deckFaction, deckLeader }) {
 
-function Deck({ deck }) {
+	console.log(deckFaction)
+	console.log(deckLeader)
 
-	console.log(deck)
 
 	return (
-		<div className='deck'>
-			{deck.map(card => (
 
-				<div key={card.id}>{card.name}</div>
+		<>
+			<div>{deckFaction}</div>
+			<div>{deckLeader}</div>
 
-			))}
-		</div>
+			<div className='deck'>
+				{deck.map(card => (
+
+					<div key={card.id}>{card.name}</div>
+
+				))}
+			</div>
+		</>
 	)
 }
 
 function mapStateToProps({ deck }) {
 
 	return {
-		deck: deck.deck
+		deck: deck.deck,
+		deckFaction: deck.deckFaction,
+		deckLeader: deck.deckLeader
 	};
 }
 

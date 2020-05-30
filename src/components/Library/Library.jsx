@@ -1,19 +1,14 @@
 import React, { Suspense } from 'react';
 import Filters from '../Filters/Filters'
-// import Cards from '../Cards/Cards'
+import Cards from '../Cards/Cards'
 import { connect } from 'react-redux';
-
-const Cards = React.lazy(() => import('../Cards/Cards'));
 
 
 function Library({ cards }) {
     return (
         <div>
             <Filters></Filters>
-            <Suspense fallback={<div>Loading...</div>}>
-                <Cards cards={cards}></Cards>
-            </Suspense>
-
+            <Cards cards={cards}></Cards>
         </div>
     )
 }

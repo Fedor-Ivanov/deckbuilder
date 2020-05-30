@@ -5,3 +5,19 @@ export function cardAdd(card) {
         payload: card
     };
 }
+
+export const ACTION_SET_DECK_FACTION = 'ACTION_SET_DECK_FACTION';
+export function setDeckFaction(faction) {
+    return {
+        type: ACTION_SET_DECK_FACTION,
+        payload: faction
+    };
+}
+
+export const ACTION_SET_DECK_LEADER = 'ACTION_SET_DECK_LEADER';
+export function setDeckLeader(leader) {
+    return {
+        type: ACTION_SET_DECK_LEADER,
+        payload: leader
+    };
+}
