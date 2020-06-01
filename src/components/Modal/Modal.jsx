@@ -87,7 +87,7 @@ const closeBtn = {
 
 function mapStateToProps({ filters, deck }) {
 
-    function playeble(arr) {
+    function playable(arr) {
         var array = arr;
         var index = arr.indexOf('Neutral');
         if (index > -1) {
@@ -99,7 +99,7 @@ function mapStateToProps({ filters, deck }) {
     return {
 
         deckFaction: filters.deckSelect.faction,
-        faction: playeble(filters.faction),
+        faction: playable(filters.faction),
         deckLeader: filters.deckSelect.leader,
         leaders: filters.deckSelect.faction === '' ? filters.leaders : filters.leaders.filter(item => item.faction === filters.deckSelect.faction),
         // setDeckFaction: deck.deckFaction,
