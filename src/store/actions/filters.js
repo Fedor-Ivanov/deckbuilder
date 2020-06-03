@@ -23,6 +23,7 @@ export function selectDeck(value) {
 
 export const ACTION_SELECT_DECK_LEADER = 'ACTION_SELECT_DECK_LEADER';
 export function selectLeader(value) {
+
     return {
         type: ACTION_SELECT_DECK_LEADER,
         payload: value

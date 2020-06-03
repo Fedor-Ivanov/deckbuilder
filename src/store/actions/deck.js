@@ -18,6 +18,6 @@ export const ACTION_SET_DECK_LEADER = 'ACTION_SET_DECK_LEADER';
 export function setDeckLeader(leader) {
     return {
         type: ACTION_SET_DECK_LEADER,
-        payload: leader
+        payload: JSON.parse(leader)
     };
 }

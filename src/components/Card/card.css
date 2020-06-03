@@ -2,7 +2,18 @@
     position: relative;
     height: 357px;
     width: 249px;
-    font-family: 'gwent'
+    font-family: 'gwent';
+    animation: fadeIn 0.2s ease-in forwards;
+    opacity: 0;
+}
+
+@keyframes fadeIn {
+    0%{
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 
 .card-img {

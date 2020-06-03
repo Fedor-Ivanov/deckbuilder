@@ -1,6 +1,6 @@
 import React from 'react'
 import './card.css'
-import { connect } from 'react-redux';
+import { connect } from 'react-redux'
 import { cardAdd } from '../../store/actions/deck'
 
 
@@ -11,7 +11,6 @@ function Card({ card, onCardAdd }) {
         color: 'red',
         textAlign: 'center'
     };
-
 
     return (
         <div className='card' onClick={() => onCardAdd(card)}>

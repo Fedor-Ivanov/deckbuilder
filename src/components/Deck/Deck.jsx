@@ -12,12 +12,12 @@ function Deck({ deck, deckFaction, deckLeader }) {
 	return (
 
 		<>
-			{sum > 150 ? alert('test') : ''}
+			{sum + +deckLeader.provision > 150 + +deckLeader.provision ? alert('test') : ''}
 
 			<div className='deck'>
 				<div>{deckFaction}</div>
-				<div>{deckLeader}</div>
-				<div>{sum}</div>
+				<div>{deckLeader.name}</div>
+				<div>{sum + +deckLeader.provision}</div>
 				{deck.map(card => (
 
 					<div key={card.id}>{card.name}</div>

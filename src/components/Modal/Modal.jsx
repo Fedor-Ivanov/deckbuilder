@@ -41,7 +41,7 @@ function Modal({ onToggleModal, faction, deckFaction, onSelectDeckFaction, leade
                 <select value={deckLeader} name='leader' onChange={({ target }) => chooseLeader(target.value)} >
                     <option value=''>choose leader</option>
                     {leaders.map(item => {
-                        return <option key={item.id}>{item.name}</option>
+                        return <option value={JSON.stringify(item)} key={item.id}>{item.name}</option>
                     })}
                 </select>
 
@@ -87,6 +87,8 @@ const closeBtn = {
 
 function mapStateToProps({ filters, deck }) {
 
+
+
     function playable(arr) {
         var array = arr;
         var index = arr.indexOf('Neutral');
@@ -102,8 +104,6 @@ function mapStateToProps({ filters, deck }) {
         faction: playable(filters.faction),
         deckLeader: filters.deckSelect.leader,
         leaders: filters.deckSelect.faction === '' ? filters.leaders : filters.leaders.filter(item => item.faction === filters.deckSelect.faction),
-        // setDeckFaction: deck.deckFaction,
-        // setDeckLeader: deck.deckLeader
 
     };
 }

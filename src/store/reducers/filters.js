@@ -45,12 +45,11 @@ let rarity = allRarity.filter(function (item, pos) {
 
 //----------------- category: leader
 let leaders = [];
-let category = data.map(function (item) {
+data.map(function (item) {
     if (item.category === 'Leader') {
         leaders.push(item)
     }
 })
-
 
 const initialState = {
     type: type,
