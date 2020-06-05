@@ -23,8 +23,8 @@ function Cards({ cards, isLoading }) {
 				{cards.map(card => (
 
 
-					<Suspense fallback={<div>Loading...</div>}>
-						<LazyLoad height={200} offset={100} once>
+					<Suspense key={card.id} fallback={<div>Loading...</div>}>
+						<LazyLoad key={card.id} height={200} offset={100} once>
 
 							<Card
 								key={card.id}

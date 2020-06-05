@@ -9,10 +9,9 @@ import {
 
 const initialState = {
     deck: [],
-    deckLocking: 12,
     deckFaction: null,
     deckLeader: null,
-
+    deckLocking: false
 };
 
 export default function (state = initialState, { type, payload }) {
@@ -44,11 +43,8 @@ export default function (state = initialState, { type, payload }) {
 
         case ACTION_RESET_DECK:
 
-            return {
-                deck: [],
-                deckFaction: null,
-                deckLeader: null
-            }
+            return state;
+
 
         case ACTION_LOCK_DECK:
 

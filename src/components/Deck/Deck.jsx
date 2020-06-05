@@ -7,7 +7,7 @@ import { deckLock } from '../../store/actions/deck'
 
 function Deck({ deck, deckFaction, deckLeader, isDeckLock, onDeckLock }) {
 
-	console.log(isDeckLock);
+	console.log(isDeckLock)
 
 	const cardsProvision = deck
 		.map(item => +item.provision)
@@ -23,12 +23,17 @@ function Deck({ deck, deckFaction, deckLeader, isDeckLock, onDeckLock }) {
 
 	const minUnits = 13;
 
+	if (deckProvision < 0) {
+		onDeckLock()
+	}
+
+	// deckProvision < 0 ? () => onDeckLock(1) : '';
+
 	return (
 
 		<>
 			<div className='deck'>
 
-				<div>{isDeckLock}</div>
 
 				<div>
 					<span>Faction - </span>
@@ -61,6 +66,7 @@ function Deck({ deck, deckFaction, deckLeader, isDeckLock, onDeckLock }) {
 					))}
 				</div>
 			</div>
+
 		</>
 
 	)
@@ -71,18 +77,18 @@ const deckWrap = {
 }
 
 
-function mapStateToProps({ deck }) {
+function mapStateToProps({ deck, cards }) {
 
 	return {
 		deck: deck.deck,
 		deckFaction: deck.deckFaction,
 		deckLeader: deck.deckLeader,
-		isDeckLock: deck.deckLocking
+		isDeckLock: deck.deckLocking,
 	};
 }
 
 const mapDispatchToProps = {
-	// onDeckLock: deckLock
+	onDeckLock: deckLock
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Deck)

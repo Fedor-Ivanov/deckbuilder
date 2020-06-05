@@ -3,7 +3,7 @@ import data from '../../data/cardlist-v6.2.0.json'
 
 const initialState = {
     cards: data,
-    isLoading: false
+    isLoading: false,
 };
 
 export default function (state = initialState, { type, payload }) {

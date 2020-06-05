@@ -32,7 +32,7 @@ export function resetDeck() {
 export const ACTION_LOCK_DECK = 'ACTION_LOCK_DECK';
 export function deckLock() {
     return {
-        type: ACTION_LOCK_DECK
+        type: ACTION_LOCK_DECK,
     };
 }
 
