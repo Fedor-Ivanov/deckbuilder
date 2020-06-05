@@ -1,5 +1,4 @@
 import React, { Suspense } from 'react'
-
 import './cards.css'
 // import Card from '../Card/Card';
 import { cardsIsLoading } from '../../store/actions/cards'

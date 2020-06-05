@@ -1,45 +1,88 @@
 import React from 'react'
 import './deck.css'
 import { connect } from 'react-redux';
+import { deckLock } from '../../store/actions/deck'
 
 
-function Deck({ deck, deckFaction, deckLeader }) {
 
-	const sum = deck
+function Deck({ deck, deckFaction, deckLeader, isDeckLock, onDeckLock }) {
+
+	console.log(isDeckLock);
+
+	const cardsProvision = deck
 		.map(item => +item.provision)
 		.reduce((prev, curr) => prev + curr, 0);
+
+	const deckProvision = 150 + +deckLeader.provision - cardsProvision;
+
+	const deckUnits = deck.map(item => item.type == "Unit").length;
+
+	const deckCards = deck.length;
+
+	const minCards = 25;
+
+	const minUnits = 13;
 
 	return (
 
 		<>
-			{sum + +deckLeader.provision > 150 + +deckLeader.provision ? alert('test') : ''}
-
 			<div className='deck'>
-				<div>{deckFaction}</div>
-				<div>{deckLeader.name}</div>
-				<div>{sum + +deckLeader.provision}</div>
-				{deck.map(card => (
 
-					<div key={card.id}>{card.name}</div>
+				<div>{isDeckLock}</div>
 
-				))}
+				<div>
+					<span>Faction - </span>
+					<span>{deckFaction}</span>
+				</div>
+				<div>
+					<span>Leader - </span>
+					<span>{deckLeader.name}</span>
+				</div>
+				<div>
+					<span>Provision - </span>
+					<span style={deckProvision < 0 ? { color: 'red' } : { color: 'black' }}>
+						{deckProvision}
+					</span>
+				</div>
+				<div>
+					<span>Cards - </span>
+					<span>{deckCards}</span>
+					{deckCards <= minCards && <span>/ {minCards}</span>}
+				</div>
+				<div>
+					<span>Units - </span>
+					<span>{deckUnits}</span>
+					{deckUnits <= minUnits && <span>/ {minUnits}</span>}
+				</div>
+
+				<div style={deckWrap}>
+					{deck.map(card => (
+						<div key={card.id}>{card.name}</div>
+					))}
+				</div>
 			</div>
 		</>
 
 	)
 }
 
+const deckWrap = {
+	marginTop: '10px'
+}
+
+
 function mapStateToProps({ deck }) {
 
 	return {
 		deck: deck.deck,
 		deckFaction: deck.deckFaction,
-		deckLeader: deck.deckLeader
+		deckLeader: deck.deckLeader,
+		isDeckLock: deck.deckLocking
 	};
 }
 
 const mapDispatchToProps = {
-
+	// onDeckLock: deckLock
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Deck)

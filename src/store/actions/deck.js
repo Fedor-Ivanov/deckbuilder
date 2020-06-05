@@ -21,3 +21,18 @@ export function setDeckLeader(leader) {
         payload: JSON.parse(leader)
     };
 }
+
+export const ACTION_RESET_DECK = 'ACTION_RESET_DECK';
+export function resetDeck() {
+    return {
+        type: ACTION_RESET_DECK
+    };
+}
+
+export const ACTION_LOCK_DECK = 'ACTION_LOCK_DECK';
+export function deckLock() {
+    return {
+        type: ACTION_LOCK_DECK
+    };
+}
+

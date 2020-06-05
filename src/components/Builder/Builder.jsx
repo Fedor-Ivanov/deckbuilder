@@ -5,18 +5,20 @@ import Deck from '../Deck/Deck'
 import Modal from '../Modal/Modal'
 import { toggleModal } from '../../store/actions/modal'
 import { resetSelectedDeck } from '../../store/actions/filters'
+import { resetDeck } from '../../store/actions/deck'
 import { Switch, Route, useRouteMatch, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 
 
-function Builder({ cards, isVisible, onToggleModal, selectedFaction, selectedLeader, onResetSelectedDeck }) {
+function Builder({ cards, isVisible, onToggleModal, selectedFaction, selectedLeader, onResetSelectedDeck, onResetDeck }) {
 
 	const { path, url } = useRouteMatch();
 
 	function onNewDeckClick() {
 		onResetSelectedDeck()
 		onToggleModal()
+		onResetDeck()
 	}
 
 	return (
@@ -55,7 +57,8 @@ function mapStateToProps({ cards, filters, modal }) {
 
 const mapDispatchToProps = {
 	onToggleModal: toggleModal,
-	onResetSelectedDeck: resetSelectedDeck
+	onResetSelectedDeck: resetSelectedDeck,
+	onResetDeck: resetDeck
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Builder)

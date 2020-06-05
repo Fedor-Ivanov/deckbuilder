@@ -87,8 +87,6 @@ const closeBtn = {
 
 function mapStateToProps({ filters, deck }) {
 
-
-
     function playable(arr) {
         var array = arr;
         var index = arr.indexOf('Neutral');
@@ -115,7 +113,6 @@ const mapDispatchToProps = {
     onResetSelectedDeck: resetSelectedDeck,
     setDeckFaction: setDeckFaction,
     setDeckLeader: setDeckLeader
-
 
 };
 
