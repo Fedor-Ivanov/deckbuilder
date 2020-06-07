@@ -3,7 +3,8 @@ import {
     ACTION_SET_DECK_FACTION,
     ACTION_SET_DECK_LEADER,
     ACTION_RESET_DECK,
-    ACTION_LOCK_DECK
+    ACTION_LOCK_DECK,
+    ACTION_DELETE_CARD_FROM_DECK
 } from '../actions/deck';
 
 
@@ -63,6 +64,13 @@ export default function (state = initialState, { type, payload }) {
             return {
                 ...state,
                 deckLocking: true
+            }
+
+        case ACTION_DELETE_CARD_FROM_DECK:
+
+            return {
+                ...state,
+                deck: state.deck.filter(item => item.id !== payload)
             }
 
         default:

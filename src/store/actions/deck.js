@@ -36,3 +36,10 @@ export function deckLock() {
     };
 }
 
+export const ACTION_DELETE_CARD_FROM_DECK = 'ACTION_DELETE_CARD_FROM_DECK';
+export function deleteCardFormDeck(id) {
+    return {
+        type: ACTION_DELETE_CARD_FROM_DECK,
+        payload: id
+    };
+}

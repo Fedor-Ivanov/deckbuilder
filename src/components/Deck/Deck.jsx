@@ -1,10 +1,10 @@
 import React from 'react'
 import './deck.css'
 import { connect } from 'react-redux';
-import { deckLock } from '../../store/actions/deck'
+import { deckLock, deleteCardFormDeck } from '../../store/actions/deck'
 
 
-function Deck({ deck, deckFaction, deckLeader, isDeckLock, onDeckLock }) {
+function Deck({ deck, deckFaction, deckLeader, isDeckLock, onDeckLock, onDeleteCardFormDeck }) {
 
 	const cardsProvision = deck
 		.map(item => +item.provision)
@@ -58,7 +58,10 @@ function Deck({ deck, deckFaction, deckLeader, isDeckLock, onDeckLock }) {
 
 				<div style={deckWrap}>
 					{deck.map(card => (
-						<div key={card.id}>{card.name}</div>
+						<div style={deckCard} key={card.id}>
+							<span>{card.name}</span>
+							<span onClick={() => onDeleteCardFormDeck(card.id)}>X</span>
+						</div>
 					))}
 				</div>
 
@@ -70,6 +73,11 @@ function Deck({ deck, deckFaction, deckLeader, isDeckLock, onDeckLock }) {
 
 const deckWrap = {
 	marginTop: '10px'
+}
+
+const deckCard = {
+	display: 'flex',
+	justifyContent: 'space-between'
 }
 
 
@@ -84,7 +92,8 @@ function mapStateToProps({ deck }) {
 }
 
 const mapDispatchToProps = {
-	onDeckLock: deckLock
+	onDeckLock: deckLock,
+	onDeleteCardFormDeck: deleteCardFormDeck
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Deck)

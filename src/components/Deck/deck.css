@@ -1,3 +1,5 @@
 .deck {
     /* grid-area: deck; */
+    justify-content: space-between;
 }
+
