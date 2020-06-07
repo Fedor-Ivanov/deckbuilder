@@ -10,7 +10,6 @@ import { Switch, Route, useRouteMatch, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 
-
 function Builder({ cards, isVisible, onToggleModal, selectedFaction, selectedLeader, onResetSelectedDeck, onResetDeck }) {
 
 	const { path, url } = useRouteMatch();

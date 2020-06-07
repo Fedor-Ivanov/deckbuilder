@@ -1,14 +1,19 @@
 import React, { Suspense } from 'react';
 import Filters from '../Filters/Filters'
-import Cards from '../Cards/Cards'
+// import Cards from '../Cards/Cards'
 import { connect } from 'react-redux';
+
+const Cards = React.lazy(() => import('../Cards/Cards'));
 
 
 function Library({ cards }) {
     return (
         <div>
             <Filters></Filters>
-            <Cards cards={cards}></Cards>
+
+            <Suspense fallback={<div>Loading...</div>}>
+                <Cards cards={cards}></Cards>
+            </Suspense>
         </div>
     )
 }
@@ -21,9 +26,9 @@ function mapStateToProps({ cards, filters }) {
             return filterKeys.every(key => {
                 if (!filters[key].length) return true;
                 if (Array.isArray(product[key])) {
-                    return product[key].some(keyEle => filters[key].includes(keyEle));
+                    return product[key].some(keyEle => filters[key] == keyEle);
                 }
-                return filters[key].includes(product[key]);
+                return filters[key] == product[key];
             });
         });
     };

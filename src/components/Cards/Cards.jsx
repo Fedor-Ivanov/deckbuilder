@@ -11,7 +11,7 @@ const Card = React.lazy(() => import('../Card/Card'));
 
 
 
-function Cards({ cards, isLoading }) {
+function Cards({ cards }) {
 
 	return (
 		<div>
@@ -24,7 +24,7 @@ function Cards({ cards, isLoading }) {
 
 
 					<Suspense key={card.id} fallback={<div>Loading...</div>}>
-						<LazyLoad key={card.id} height={200} offset={100} once>
+						<LazyLoad key={card.id} height={200} offset={0}>
 
 							<Card
 								key={card.id}

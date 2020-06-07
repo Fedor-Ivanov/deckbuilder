@@ -7,15 +7,15 @@ import { deckLock } from '../../store/actions/deck'
 
 function Deck({ deck, deckFaction, deckLeader, isDeckLock, onDeckLock }) {
 
-	console.log(isDeckLock)
-
 	const cardsProvision = deck
 		.map(item => +item.provision)
 		.reduce((prev, curr) => prev + curr, 0);
 
 	const deckProvision = 150 + +deckLeader.provision - cardsProvision;
 
-	const deckUnits = deck.map(item => item.type == "Unit").length;
+	const deckUnits = deck
+		.map(item => item.type == "Unit")
+		.filter(item => item === true).length;
 
 	const deckCards = deck.length;
 
@@ -27,13 +27,10 @@ function Deck({ deck, deckFaction, deckLeader, isDeckLock, onDeckLock }) {
 		onDeckLock()
 	}
 
-	// deckProvision < 0 ? () => onDeckLock(1) : '';
-
 	return (
 
 		<>
 			<div className='deck'>
-
 
 				<div>
 					<span>Faction - </span>
@@ -65,8 +62,8 @@ function Deck({ deck, deckFaction, deckLeader, isDeckLock, onDeckLock }) {
 						<div key={card.id}>{card.name}</div>
 					))}
 				</div>
-			</div>
 
+			</div>
 		</>
 
 	)
@@ -77,7 +74,7 @@ const deckWrap = {
 }
 
 
-function mapStateToProps({ deck, cards }) {
+function mapStateToProps({ deck }) {
 
 	return {
 		deck: deck.deck,

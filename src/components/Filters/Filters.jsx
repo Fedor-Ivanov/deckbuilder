@@ -29,7 +29,7 @@ function Filters({ type, provision, faction, rarity, selectedType, selectedProvi
 			<select value={selectedProvision} name='provision' onChange={({ target }) => onSelect(target.value, target.name)} >
 				<option value='' >All</option>
 				{provision.map(item => {
-					return <option key={item}>{item}</option>
+					return <option value={item} key={item}>{item}</option>
 				})}
 			</select>
 			<select value={selectedFaction} name='faction' onChange={({ target }) => onSelect(target.value, target.name)} >

@@ -69,9 +69,10 @@
     z-index: 100;
     font-size: 35px;
     color: aliceblue;
-    background: linear-gradient(to top, #fceabb, #f8b500); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    /* background: linear-gradient(to top, #fceabb, #f8b500);
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    -webkit-text-fill-color: transparent; */
+    z-index: 100;
 }
 
 .card-power-value {
@@ -86,9 +87,10 @@
     z-index: 100;
     font-size: 35px;
     color: aliceblue;
-    background: linear-gradient(to top, #ada996, #f2f2f2, #dbdbdb, #eaeaea); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    /* background: linear-gradient(to top, #ada996, #f2f2f2, #dbdbdb, #eaeaea);
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    -webkit-text-fill-color: transparent; */
+    z-index: 100;
 }
 
 .card-type {

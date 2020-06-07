@@ -14,16 +14,29 @@ const initialState = {
     deckLocking: false
 };
 
+function checkDupl(payload) {
+
+    payload.id = payload.id + '_2';
+
+    return payload;
+
+}
+
 export default function (state = initialState, { type, payload }) {
     switch (type) {
 
         case ACTION_ADD_CARD_TO_DECK:
+
+            console.log(state.deck.includes(payload))
+
+            console.log(state.deck)
 
             return {
                 ...state,
                 deck: [
                     ...state.deck,
                     payload
+                    // state.deck.includes(payload) ? checkDupl(payload) : payload
                 ]
             }
 
@@ -44,7 +57,6 @@ export default function (state = initialState, { type, payload }) {
         case ACTION_RESET_DECK:
 
             return state;
-
 
         case ACTION_LOCK_DECK:
 
