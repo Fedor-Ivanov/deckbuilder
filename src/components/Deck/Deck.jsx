@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { deckLock } from '../../store/actions/deck'
 
 
-
 function Deck({ deck, deckFaction, deckLeader, isDeckLock, onDeckLock }) {
 
 	const cardsProvision = deck

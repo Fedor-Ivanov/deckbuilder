@@ -7,11 +7,6 @@ import { cardAdd } from '../../store/actions/deck'
 
 function Card({ card, onCardAdd }) {
 
-    const test = {
-        color: 'red',
-        textAlign: 'center'
-    };
-
     return (
         <div className='card' onClick={() => onCardAdd(card)}>
 

@@ -27,16 +27,16 @@ export default function (state = initialState, { type, payload }) {
 
         case ACTION_ADD_CARD_TO_DECK:
 
-            console.log(state.deck.includes(payload))
+            // console.log(state.deck.includes(payload))
 
-            console.log(state.deck)
+            // state.deck.includes(payload) ? checkDupl(payload) : payload
 
             return {
                 ...state,
                 deck: [
                     ...state.deck,
                     payload
-                    // state.deck.includes(payload) ? checkDupl(payload) : payload
+
                 ]
             }
 

@@ -24,7 +24,7 @@ function Cards({ cards }) {
 
 
 					<Suspense key={card.id} fallback={<div>Loading...</div>}>
-						<LazyLoad key={card.id} height={200} offset={0}>
+						<LazyLoad key={card.id} height={200} offset={100} once>
 
 							<Card
 								key={card.id}
