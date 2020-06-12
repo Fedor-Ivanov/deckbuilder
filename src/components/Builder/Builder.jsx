@@ -10,7 +10,25 @@ import { Switch, Route, useRouteMatch, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 
-function Builder({ cards, isVisible, onToggleModal, selectedFaction, selectedLeader, onResetSelectedDeck, onResetDeck }) {
+function Builder({ cards, isVisible, onToggleModal, selectedFaction, selectedLeader, onResetSelectedDeck, onResetDeck, deck }) {
+
+
+	let qwe = cards.filter(function (item) {
+		if (item.color === 'Gold') {
+			return !deck.includes(item)
+		}
+		else if (item.color === 'Bronze') {
+
+			if (deck.filter(deckItem => deckItem.name === item.name).length < 2) {
+				return deck.filter(deckItem => deckItem.name === item.name)
+			}
+
+
+
+		}
+	})
+
+	qwe.sort((a, b) => (+a.provision - +b.provision));
 
 	const { path, url } = useRouteMatch();
 
@@ -31,7 +49,7 @@ function Builder({ cards, isVisible, onToggleModal, selectedFaction, selectedLea
 					{
 						selectedFaction && selectedLeader && !isVisible &&
 						<div className='wrap'>
-							<Cards className='cards' cards={cards}>
+							<Cards className='cards' cards={qwe}>
 							</Cards>
 							<Deck className='deck'>
 							</Deck>
@@ -44,13 +62,14 @@ function Builder({ cards, isVisible, onToggleModal, selectedFaction, selectedLea
 	)
 }
 
-function mapStateToProps({ cards, filters, modal }) {
+function mapStateToProps({ cards, filters, modal, deck }) {
 
 	return {
 		cards: cards.cards.filter(item => item.faction === 'Neutral').concat(cards.cards.filter(item => item.faction === filters.deckSelect.faction)),
 		isVisible: modal.isVisible,
 		selectedFaction: filters.deckSelect.faction,
 		selectedLeader: filters.deckSelect.leader,
+		deck: deck.deck
 	};
 }
 

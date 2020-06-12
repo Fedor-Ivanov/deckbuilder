@@ -7,6 +7,9 @@ const Cards = React.lazy(() => import('../Cards/Cards'));
 
 
 function Library({ cards }) {
+
+    cards.sort((a, b) => (+a.provision - +b.provision));
+
     return (
         <div>
             <Filters></Filters>

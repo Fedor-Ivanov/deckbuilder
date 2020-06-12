@@ -57,7 +57,7 @@ function Deck({ deck, deckFaction, deckLeader, isDeckLock, onDeckLock, onDeleteC
 				</div>
 
 				<div style={deckWrap}>
-					{deck.map(card => (
+					{deck.map(card => card === false ? "" : (
 						<div style={deckCard} key={card.id}>
 							<span>{card.name}</span>
 							<span onClick={() => onDeleteCardFormDeck(card.id)}>X</span>

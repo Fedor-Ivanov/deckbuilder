@@ -5,9 +5,19 @@ import { cardAdd } from '../../store/actions/deck'
 
 
 
-function Card({ card, onCardAdd }) {
+function Card({ card, onCardAdd, deck }) {
+
+    // let qwe = cards.filter(item => !deck.includes(item))
+
+
+
 
     return (
+
+        // deck.includes(card) && card.color === 'Gold' ? '' :
+
+
+
         <div className='card' onClick={() => onCardAdd(card)}>
 
             {/* img */}
@@ -112,10 +122,10 @@ function Card({ card, onCardAdd }) {
     )
 }
 
-function mapStateToProps({ cards }) {
+function mapStateToProps({ deck }) {
 
     return {
-
+        deck: deck.deck
     };
 }
 

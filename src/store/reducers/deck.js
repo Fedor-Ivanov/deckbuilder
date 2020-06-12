@@ -19,6 +19,16 @@ function checkDupl(payload) {
 
     let duplicatedCard = payload.id + "_" + Date.now();
 
+    // if (payload.color === 'Gold') {
+    //     return false;
+    // }
+
+    // if (payload.color === 'Gold') {
+    //     return null;
+    // } else if (payload.color === 'Bronze') {
+    //     alert('Bronze')
+    // }
+
     return {
         ...payload,
         id: duplicatedCard
@@ -31,13 +41,13 @@ export default function (state = initialState, { type, payload }) {
 
         case ACTION_ADD_CARD_TO_DECK:
 
-            console.log(state.deck)
 
             return {
                 ...state,
                 deck: [
                     ...state.deck,
                     state.deck.includes(payload) ? checkDupl(payload) : payload
+                    // payload
                 ]
             }
 
