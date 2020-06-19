@@ -30,41 +30,41 @@ function Deck({ deck, deckFaction, deckLeader, isDeckLock, onDeckLock, onDeleteC
 
 		<>
 			<div className='deck'>
+				<div className="deck__wrap">
+					<div>
+						<span>Faction - </span>
+						<span>{deckFaction}</span>
+					</div>
+					<div>
+						<span>Leader - </span>
+						<span>{deckLeader.name}</span>
+					</div>
+					<div>
+						<span>Provision - </span>
+						<span style={deckProvision < 0 ? { color: 'red' } : { color: 'black' }}>
+							{deckProvision}
+						</span>
+					</div>
+					<div>
+						<span>Cards - </span>
+						<span>{deckCards}</span>
+						{deckCards <= minCards && <span>/ {minCards}</span>}
+					</div>
+					<div>
+						<span>Units - </span>
+						<span>{deckUnits}</span>
+						{deckUnits <= minUnits && <span>/ {minUnits}</span>}
+					</div>
 
-				<div>
-					<span>Faction - </span>
-					<span>{deckFaction}</span>
+					<div style={deckWrap}>
+						{deck.map(card => card === false ? "" : (
+							<div style={deckCard} key={card.id}>
+								<span>{card.name}</span>
+								<span onClick={() => onDeleteCardFormDeck(card.id)}>X</span>
+							</div>
+						))}
+					</div>
 				</div>
-				<div>
-					<span>Leader - </span>
-					<span>{deckLeader.name}</span>
-				</div>
-				<div>
-					<span>Provision - </span>
-					<span style={deckProvision < 0 ? { color: 'red' } : { color: 'black' }}>
-						{deckProvision}
-					</span>
-				</div>
-				<div>
-					<span>Cards - </span>
-					<span>{deckCards}</span>
-					{deckCards <= minCards && <span>/ {minCards}</span>}
-				</div>
-				<div>
-					<span>Units - </span>
-					<span>{deckUnits}</span>
-					{deckUnits <= minUnits && <span>/ {minUnits}</span>}
-				</div>
-
-				<div style={deckWrap}>
-					{deck.map(card => card === false ? "" : (
-						<div style={deckCard} key={card.id}>
-							<span>{card.name}</span>
-							<span onClick={() => onDeleteCardFormDeck(card.id)}>X</span>
-						</div>
-					))}
-				</div>
-
 			</div>
 		</>
 

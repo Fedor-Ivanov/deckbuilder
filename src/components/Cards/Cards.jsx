@@ -11,9 +11,7 @@ const Card = React.lazy(() => import('../Card/Card'));
 
 
 
-function Cards({ cards, deck }) {
-
-	// let qwe = cards.filter(item => !deck.includes(item))
+function Cards({ cards }) {
 
 	return (
 		<div>
@@ -26,9 +24,7 @@ function Cards({ cards, deck }) {
 
 
 					<Suspense key={card.id} fallback={<div>Loading...</div>}>
-						<LazyLoad key={card.id} height={200} offset={100} once>
-
-
+						<LazyLoad key={card.id} height={400} offset={400} once>
 
 							<Card
 								key={card.id}
@@ -47,11 +43,10 @@ function Cards({ cards, deck }) {
 }
 
 
-function mapStateToProps({ cards, deck }) {
+function mapStateToProps({ cards }) {
 
 	return {
 		isLoading: cards.isLoading,
-		deck: deck.deck
 	};
 }
 
