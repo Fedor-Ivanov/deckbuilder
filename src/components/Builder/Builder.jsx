@@ -21,33 +21,35 @@ function Builder({
 	deck
 }) {
 
+	const even = (element) => element.type === "Stratagem";
+
+	let stratagemCards = cards.filter(item => item.type === 'Stratagem');
+
 	let filteredDeckCards = cards.filter(function (item) {
+
 		if (item.color === 'Gold') {
 			return !deck.includes(item)
 		}
+
 		else if (item.color === 'Bronze') {
 			if (deck.filter(deckItem => deckItem.name === item.name).length < 2) {
 				return deck.filter(deckItem => deckItem.name === item.name)
 			}
 		}
+
 	})
-
-
 
 	let filteredCards = filteredDeckCards
 		.filter(item => item.type !== 'Ability')
 		.filter(item => item.provision !== '0')
 		.filter(item => item.id !== '201725' && item.id !== '201731' && item.id !== '201737')
 
-	let stratagemCards = cards.filter(item => item.type === 'Stratagem');
 
 	filteredCards.sort((a, b) => {
 		return +b.provision - +a.provision;
 	})
 
-	let finalCards = stratagemCards.concat(filteredCards)
-
-
+	let finalCards = deck.some(even) ? filteredCards : stratagemCards.concat(filteredCards)
 
 	const { path, url } = useRouteMatch();
 

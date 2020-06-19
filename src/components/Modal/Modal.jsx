@@ -35,7 +35,8 @@ function Modal({ onToggleModal, faction, deckFaction, onSelectDeckFaction, leade
                 <div>
                     {faction.map(item => {
                         return (
-                            <label>
+                            <label
+                                key={item}>
                                 <input
                                     type="radio"
                                     name="faction"
@@ -51,7 +52,8 @@ function Modal({ onToggleModal, faction, deckFaction, onSelectDeckFaction, leade
                 <div>
                     {leaders.map(item => {
                         return (
-                            <label>
+                            <label
+                                key={item.id}>
                                 <input
                                     type="radio"
                                     name="leader"
