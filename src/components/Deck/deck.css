@@ -1,5 +1,4 @@
 .deck {
-    /* grid-area: deck; */
-    justify-content: space-between;
+    position: fixed;
+    right: 20px;
 }
-

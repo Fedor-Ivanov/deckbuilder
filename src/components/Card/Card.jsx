@@ -11,8 +11,7 @@ function Card({ card, onCardAdd, deck }) {
 
         <div className='card' onClick={() => onCardAdd(card)}>
 
-            <h1 style={header}>{card.provision}</h1>
-
+            {/* <h1 style={header}>{card.provision}</h1> */}
 
             {/* img */}
             {<img className='card-img' src={require(`../../images/cards/${card.artid}.jpg`)} alt="card" />}

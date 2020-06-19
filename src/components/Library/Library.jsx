@@ -10,13 +10,9 @@ function Library({ cards }) {
 
     let filteredCards = cards.filter(item => item.type !== 'Ability').filter(item => item.provision !== '0');
 
-    // filteredCards
-
-
     filteredCards.sort((a, b) => {
         return +b.provision - +a.provision;
     })
-
 
     return (
         <div>
