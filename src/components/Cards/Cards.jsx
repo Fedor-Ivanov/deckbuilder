@@ -13,7 +13,7 @@ const Card = React.lazy(() => import('../Card/Card'));
 
 function Cards({ cards, deck }) {
 
-	let qwe = cards.filter(item => !deck.includes(item))
+	// let qwe = cards.filter(item => !deck.includes(item))
 
 	return (
 		<div>

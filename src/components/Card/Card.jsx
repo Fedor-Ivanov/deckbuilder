@@ -5,13 +5,13 @@ import { cardAdd } from '../../store/actions/deck'
 
 
 
-function Card({ card, onCardAdd, deck }) {
+function Card({ card, onCardAdd }) {
 
     return (
 
         <div className='card' onClick={() => onCardAdd(card)}>
 
-            {/* <h1 style={header}>{card.provision}</h1> */}
+            <h1 style={header}>{card.id}</h1>
 
             {/* img */}
             {<img className='card-img' src={require(`../../images/cards/${card.artid}.jpg`)} alt="card" />}

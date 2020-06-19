@@ -8,17 +8,24 @@ const Cards = React.lazy(() => import('../Cards/Cards'));
 
 function Library({ cards }) {
 
-    let filteredCards = cards.filter(item => item.type !== 'Ability').filter(item => item.provision !== '0');
+    let filteredCards = cards
+        .filter(item => item.type !== 'Ability')
+        .filter(item => item.provision !== '0')
+        .filter(item => item.id !== '201725' && item.id !== '201731' && item.id !== '201737')
 
     filteredCards.sort((a, b) => {
         return +b.provision - +a.provision;
     })
 
+    let stratagemCards = cards.filter(item => item.type === 'Stratagem');
+
+    let finalCards = stratagemCards.concat(filteredCards)
+
     return (
         <div>
             <Filters></Filters>
             <Suspense fallback={<div>Loading...</div>}>
-                <Cards cards={filteredCards}></Cards>
+                <Cards cards={finalCards}></Cards>
             </Suspense>
         </div>
     )

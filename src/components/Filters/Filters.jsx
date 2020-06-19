@@ -10,6 +10,8 @@ function Filters({ type, provision, faction, rarity, selectedType, selectedProvi
 
 	let filteredProvision = provision.filter(prov => prov > 1 && prov < 15)
 
+	let filteredType = type.filter(item => item !== 'Ability')
+
 	useEffect(() => {
 		onReset()
 	}, [])
@@ -23,7 +25,7 @@ function Filters({ type, provision, faction, rarity, selectedType, selectedProvi
 
 			<select value={selectedType} name='type' onChange={({ target }) => onSelect(target.value, target.name)} >
 				<option value='' >All</option>
-				{type.map(item => {
+				{filteredType.map(item => {
 					return <option key={item}>{item}</option>
 				})}
 			</select>
