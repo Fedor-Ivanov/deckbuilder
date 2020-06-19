@@ -8,14 +8,21 @@ const Cards = React.lazy(() => import('../Cards/Cards'));
 
 function Library({ cards }) {
 
-    cards.sort((a, b) => (+a.provision - +b.provision));
+    let filteredCards = cards.filter(item => item.type !== 'Ability').filter(item => item.provision !== '0');
+
+    // filteredCards
+
+
+    filteredCards.sort((a, b) => {
+        return +b.provision - +a.provision;
+    })
+
 
     return (
         <div>
             <Filters></Filters>
-
             <Suspense fallback={<div>Loading...</div>}>
-                <Cards cards={cards}></Cards>
+                <Cards cards={filteredCards}></Cards>
             </Suspense>
         </div>
     )

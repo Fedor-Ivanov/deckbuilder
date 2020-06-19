@@ -12,24 +12,22 @@ import { connect } from 'react-redux';
 
 function Builder({ cards, isVisible, onToggleModal, selectedFaction, selectedLeader, onResetSelectedDeck, onResetDeck, deck }) {
 
-
-	let qwe = cards.filter(function (item) {
+	let filteredDeckCards = cards.filter(function (item) {
 		if (item.color === 'Gold') {
 			return !deck.includes(item)
 		}
 		else if (item.color === 'Bronze') {
-
 			if (deck.filter(deckItem => deckItem.name === item.name).length < 2) {
 				return deck.filter(deckItem => deckItem.name === item.name)
 			}
-
-
-
 		}
 	})
 
-	qwe.sort((a, b) => (+a.provision - +b.provision));
+	let filteredCards = filteredDeckCards.filter(item => item.type !== 'Ability').filter(item => item.provision !== '0');
 
+	filteredCards.sort((a, b) => {
+		return +b.provision - +a.provision;
+	})
 	const { path, url } = useRouteMatch();
 
 	function onNewDeckClick() {
@@ -49,14 +47,13 @@ function Builder({ cards, isVisible, onToggleModal, selectedFaction, selectedLea
 					{
 						selectedFaction && selectedLeader && !isVisible &&
 						<div className='wrap'>
-							<Cards className='cards' cards={qwe}>
+							<Cards className='cards' cards={filteredCards}>
 							</Cards>
 							<Deck className='deck'>
 							</Deck>
 						</div>
 					}
 				</Route>
-
 			</Switch>
 		</div>
 	)
