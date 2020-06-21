@@ -31,6 +31,43 @@ function Modal({ onToggleModal, faction, deckFaction, onSelectDeckFaction, leade
         <div style={backdropStyle}>
             <div style={modalStyle}>
 
+
+                <div>
+                    {faction.map(item => {
+                        return (
+                            <label
+                                key={item}>
+                                <input
+                                    type="radio"
+                                    name="faction"
+                                    onChange={({ target }) => chooseFaction(target.value)}
+                                    value={item}
+                                    key={item} />
+                                {item}
+                            </label>
+                        )
+                    })}
+                </div>
+
+                <div>
+                    {leaders.map(item => {
+                        return (
+                            <label
+                                key={item.id}>
+                                <input
+                                    type="radio"
+                                    name="leader"
+                                    onChange={({ target }) => chooseLeader(target.value)}
+                                    value={JSON.stringify(item)}
+                                    key={item.id} />
+                                {item.name}
+                            </label>
+                        )
+                    })}
+                </div>
+
+
+                {/*             
                 <select value={deckFaction} name='faction' onChange={({ target }) => chooseFaction(target.value)} >
                     <option value=''>choose faction</option>
                     {faction.map(item => {
@@ -43,7 +80,7 @@ function Modal({ onToggleModal, faction, deckFaction, onSelectDeckFaction, leade
                     {leaders.map(item => {
                         return <option value={JSON.stringify(item)} key={item.id}>{item.name}</option>
                     })}
-                </select>
+                </select> */}
 
                 {
                     deckFaction && deckLeader && <button style={closeBtn} onClick={onToggleModal}>done</button>

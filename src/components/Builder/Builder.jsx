@@ -10,25 +10,46 @@ import { Switch, Route, useRouteMatch, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 
-function Builder({ cards, isVisible, onToggleModal, selectedFaction, selectedLeader, onResetSelectedDeck, onResetDeck, deck }) {
+function Builder({
+	cards,
+	isVisible,
+	onToggleModal,
+	selectedFaction,
+	selectedLeader,
+	onResetSelectedDeck,
+	onResetDeck,
+	deck
+}) {
 
+	const even = (element) => element.type === "Stratagem";
 
-	let qwe = cards.filter(function (item) {
+	let stratagemCards = cards.filter(item => item.type === 'Stratagem');
+
+	let filteredDeckCards = cards.filter(function (item) {
+
 		if (item.color === 'Gold') {
 			return !deck.includes(item)
 		}
-		else if (item.color === 'Bronze') {
 
+		else if (item.color === 'Bronze') {
 			if (deck.filter(deckItem => deckItem.name === item.name).length < 2) {
 				return deck.filter(deckItem => deckItem.name === item.name)
 			}
-
-
-
 		}
+
 	})
 
-	qwe.sort((a, b) => (+a.provision - +b.provision));
+	let filteredCards = filteredDeckCards
+		.filter(item => item.type !== 'Ability')
+		.filter(item => item.provision !== '0')
+		.filter(item => item.id !== '201725' && item.id !== '201731' && item.id !== '201737')
+
+
+	filteredCards.sort((a, b) => {
+		return +b.provision - +a.provision;
+	})
+
+	let finalCards = deck.some(even) ? filteredCards : stratagemCards.concat(filteredCards)
 
 	const { path, url } = useRouteMatch();
 
@@ -49,14 +70,13 @@ function Builder({ cards, isVisible, onToggleModal, selectedFaction, selectedLea
 					{
 						selectedFaction && selectedLeader && !isVisible &&
 						<div className='wrap'>
-							<Cards className='cards' cards={qwe}>
+							<Cards className='cards' cards={finalCards}>
 							</Cards>
 							<Deck className='deck'>
 							</Deck>
 						</div>
 					}
 				</Route>
-
 			</Switch>
 		</div>
 	)

@@ -5,20 +5,13 @@ import { cardAdd } from '../../store/actions/deck'
 
 
 
-function Card({ card, onCardAdd, deck }) {
-
-    // let qwe = cards.filter(item => !deck.includes(item))
-
-
-
+function Card({ card, onCardAdd }) {
 
     return (
 
-        // deck.includes(card) && card.color === 'Gold' ? '' :
-
-
-
         <div className='card' onClick={() => onCardAdd(card)}>
+
+            {/* <h1 style={header}>{card.id}</h1> */}
 
             {/* img */}
             {<img className='card-img' src={require(`../../images/cards/${card.artid}.jpg`)} alt="card" />}
@@ -121,6 +114,17 @@ function Card({ card, onCardAdd, deck }) {
         </div>
     )
 }
+
+const header = {
+    zIndex: '10',
+    position: 'absolute',
+    color: '#fff',
+    textAlign: 'center',
+    width: '100%',
+    fontSize: '60px',
+    textShadow: "2px 0 0 red, -2px 0 0 red, 0 2px 0 red, 0 -2px 0 red, 1px 1px red, -1px -1px 0 red, 1px -1px 0 red, -1px 1px 0 red"
+
+};
 
 function mapStateToProps({ deck }) {
 
