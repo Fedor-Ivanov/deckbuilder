@@ -5,10 +5,22 @@ import { selectDeck, selectLeader, resetSelectedDeck } from '../../store/actions
 import { setDeckFaction, setDeckLeader } from '../../store/actions/deck'
 import { Switch, Route, useRouteMatch } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
+import { toggleModal } from '../../store/actions/modal'
 
 
-
-function Modal({ onToggleModal, faction, deckFaction, onSelectDeckFaction, leaders, deckLeader, onSelectDeckLeader, onResetSelectedDeck, setDeckFaction, setDeckLeader }) {
+function Modal({
+    onToggleModal,
+    faction,
+    deckFaction,
+    onSelectDeckFaction,
+    leaders,
+    deckLeader,
+    onSelectDeckLeader,
+    onResetSelectedDeck,
+    setDeckFaction,
+    setDeckLeader,
+    modalCard
+}) {
 
     const history = useHistory();
 
@@ -39,7 +51,6 @@ function Modal({ onToggleModal, faction, deckFaction, onSelectDeckFaction, leade
         <div style={backdropStyle}>
             <div style={modalStyle}>
 
-
                 <Switch>
                     <Route exact path={`${path}/new`}>
                         {
@@ -50,53 +61,57 @@ function Modal({ onToggleModal, faction, deckFaction, onSelectDeckFaction, leade
                                             <label
                                                 key={item}>
                                                 <input
+                                                    style={{ display: 'none' }}
                                                     type="radio"
                                                     name="faction"
                                                     onChange={({ target }) => chooseFaction(target.value)}
                                                     value={item}
                                                     key={item} />
-                                                {item}
+                                                <img src={require(`../../images/fraction/${item}.png`)} alt="" />
                                             </label>
                                         )
                                     })}
                                 </div>
 
-                                <div>
-                                    {leaders.map(item => {
-                                        return (
-                                            <label
-                                                key={item.id}>
-                                                <input
-                                                    type="radio"
-                                                    name="leader"
-                                                    onChange={({ target }) => chooseLeader(target.value)}
-                                                    value={JSON.stringify(item)}
-                                                    key={item.id} />
-                                                {item.name}
-                                            </label>
-                                        )
-                                    })}
-                                </div>
-
+                                {deckFaction &&
+                                    <div>
+                                        {leaders.map(item => {
+                                            return (
+                                                <label
+                                                    key={item.id}>
+                                                    <input
+                                                        style={{ display: 'none' }}
+                                                        type="radio"
+                                                        name="leader"
+                                                        onChange={({ target }) => chooseLeader(target.value)}
+                                                        value={JSON.stringify(item)}
+                                                        key={item.id} />
+                                                    <img src={require(`../../images/leaders/${item.id}.png`)} alt="" />
+                                                </label>
+                                            )
+                                        })}
+                                    </div>
+                                }
                                 {
                                     deckFaction && deckLeader && <button style={closeBtn} onClick={onToggleModal}>done</button>
                                 }
-
                                 <button style={closeBtn} onClick={onCloseClick}>close</button>
                             </div>
                         }
                     </Route>
-                    <Route exact path={`${path}/card`}>
-                        {
-                            <>
-                                <div>tratata</div>
-                                <button style={closeBtn} onClick={onCloseModalClick}>close</button>
-                            </>
-                        }
-                    </Route>
+
+                    {modalCard &&
+                        <Route path={`${path}/card`}>
+                            {
+                                <>
+                                    <div>{modalCard.name}</div>
+                                    <button style={closeBtn} onClick={onCloseModalClick}>close</button>
+                                </>
+                            }
+                        </Route>
+                    }
 
                 </Switch>
-
 
 
 
@@ -142,8 +157,8 @@ function Modal({ onToggleModal, faction, deckFaction, onSelectDeckFaction, leade
 
                     <button style={closeBtn} onClick={onCloseClick}>close</button>
                     </div> */}
-                {/*             
-                <select value={deckFaction} name='faction' onChange={({ target }) => chooseFaction(target.value)} >
+
+                {/* <select value={deckFaction} name='faction' onChange={({ target }) => chooseFaction(target.value)} >
                     <option value=''>choose faction</option>
                     {faction.map(item => {
                         return <option key={item}>{item}</option>
@@ -180,7 +195,7 @@ const backdropStyle = {
 const modalStyle = {
     backgroundColor: '#fff',
     borderRadius: 5,
-    maxWidth: 500,
+    minWidth: 500,
     minHeight: 185,
     margin: '0 auto',
     padding: 30,
@@ -196,7 +211,7 @@ const closeBtn = {
     marginTop: 10
 };
 
-function mapStateToProps({ filters, deck }) {
+function mapStateToProps({ filters }) {
 
     function playable(arr) {
         var array = arr;
@@ -223,7 +238,8 @@ const mapDispatchToProps = {
     onSelectDeckLeader: selectLeader,
     onResetSelectedDeck: resetSelectedDeck,
     setDeckFaction: setDeckFaction,
-    setDeckLeader: setDeckLeader
+    setDeckLeader: setDeckLeader,
+    onToggleModal: toggleModal,
 
 };
 

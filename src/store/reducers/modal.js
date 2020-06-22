@@ -1,8 +1,12 @@
-import { ACTION_TOGGLE_MODAL } from '../actions/modal';
+import {
+    ACTION_TOGGLE_MODAL,
+    ACTION_CARD_MODAL
+} from '../actions/modal';
 
 
 const initialState = {
-    isVisible: false
+    isVisible: false,
+    modalCard: null
 };
 
 export default function (state = initialState, { type, payload }) {
@@ -10,11 +14,16 @@ export default function (state = initialState, { type, payload }) {
 
         case ACTION_TOGGLE_MODAL:
 
-            console.log('1');
-
             return {
                 ...state,
                 isVisible: !state.isVisible
+            }
+
+        case ACTION_CARD_MODAL:
+
+            return {
+                ...state,
+                modalCard: payload
             }
 
         default:

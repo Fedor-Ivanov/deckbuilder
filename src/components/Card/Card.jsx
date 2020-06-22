@@ -2,19 +2,20 @@ import React from 'react'
 import './card.css'
 import { connect } from 'react-redux'
 import { cardAdd } from '../../store/actions/deck'
-import { toggleModal } from '../../store/actions/modal'
-import Modal from '../Modal/Modal'
+import { toggleModal, openModalCard } from '../../store/actions/modal'
 
 import { useRouteMatch, Link } from 'react-router-dom';
 
 
 
 
-function Card({ card, onCardAdd, isVisible, onToggleModal }) {
+function Card({ card, onCardAdd, onToggleModal, onOpenModalCard }) {
 
-    const { url } = useRouteMatch();
+    const { path, url } = useRouteMatch();
 
     function onDescriptionCardClick() {
+
+        onOpenModalCard(card)
         onToggleModal()
     }
 
@@ -122,11 +123,7 @@ function Card({ card, onCardAdd, isVisible, onToggleModal }) {
                     <img className='card-type' src={require(`../../images/trinket/trinket-stratagem.png`)} alt="" />
                 }
 
-
-                <Link style={description} onClick={onDescriptionCardClick} to={`${url}/card`}>Description</Link>
-                {
-                    isVisible && <Modal onToggleModal={onToggleModal}></Modal>
-                }
+                <Link style={description} onClick={() => onDescriptionCardClick(card)} to={`${url}/card`}>Description</Link>
 
             </div>
 
@@ -166,6 +163,7 @@ function mapStateToProps({ deck, modal }) {
 const mapDispatchToProps = {
     onCardAdd: cardAdd,
     onToggleModal: toggleModal,
+    onOpenModalCard: openModalCard
 
 };
 

@@ -3,18 +3,18 @@ import data from '../../data/cardlist-v6.2.0.json'
 
 const initialState = {
     cards: data,
-    isLoading: false,
+    // isLoading: false,
 };
 
 export default function (state = initialState, { type, payload }) {
     switch (type) {
 
-        case ACTION_CARDS_IS_LOADING:
+        // case ACTION_CARDS_IS_LOADING:
 
-            return {
-                ...state,
-                isLoading: !state.isLoading
-            }
+        //     return {
+        //         ...state,
+        //         isLoading: !state.isLoading
+        //     }
 
         default:
             return state;

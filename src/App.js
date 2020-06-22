@@ -22,7 +22,7 @@ function App() {
 						<Library></Library>
 					</Route>
 					<Route path="/">
-						<h1 className=''>welcome</h1>
+						<h1>welcome</h1>
 					</Route>
 				</Switch>
 			</Router>
