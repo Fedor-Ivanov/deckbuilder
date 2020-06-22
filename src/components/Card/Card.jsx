@@ -123,11 +123,16 @@ function Card({ card, onCardAdd, isVisible, onToggleModal }) {
                 }
 
 
+<<<<<<< HEAD
                 <Link style={description} onClick={onDescriptionCardClick} to={`${url}/card`}>Description</Link>
                 {
                     isVisible && <Modal onToggleModal={onToggleModal}></Modal>
                 }
 
+=======
+
+                <span style={description}>Description</span>
+>>>>>>> f0d08572004b3a9b338e826dac3bd9871e529a44
             </div>
 
         </>

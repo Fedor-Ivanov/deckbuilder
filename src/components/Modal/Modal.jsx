@@ -40,7 +40,6 @@ function Modal({ onToggleModal, faction, deckFaction, onSelectDeckFaction, leade
             <div style={modalStyle}>
 
 
-
                 <Switch>
                     <Route exact path={`${path}/new`}>
                         {
