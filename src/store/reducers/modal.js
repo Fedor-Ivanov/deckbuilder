@@ -10,6 +10,8 @@ export default function (state = initialState, { type, payload }) {
 
         case ACTION_TOGGLE_MODAL:
 
+            console.log('1');
+
             return {
                 ...state,
                 isVisible: !state.isVisible

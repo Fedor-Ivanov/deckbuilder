@@ -3,6 +3,7 @@ import './modal.css'
 import { connect } from 'react-redux';
 import { selectDeck, selectLeader, resetSelectedDeck } from '../../store/actions/filters'
 import { setDeckFaction, setDeckLeader } from '../../store/actions/deck'
+import { Switch, Route, useRouteMatch } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 
 
@@ -11,10 +12,17 @@ function Modal({ onToggleModal, faction, deckFaction, onSelectDeckFaction, leade
 
     const history = useHistory();
 
+    const { path, url } = useRouteMatch();
+
     function onCloseClick() {
         onResetSelectedDeck()
         onToggleModal()
         history.push('/builder')
+    }
+
+    function onCloseModalClick() {
+        onToggleModal()
+        history.push(`${url}`)
     }
 
     function chooseFaction(faction) {
@@ -32,41 +40,109 @@ function Modal({ onToggleModal, faction, deckFaction, onSelectDeckFaction, leade
             <div style={modalStyle}>
 
 
-                <div>
-                    {faction.map(item => {
-                        return (
-                            <label
-                                key={item}>
-                                <input
-                                    type="radio"
-                                    name="faction"
-                                    onChange={({ target }) => chooseFaction(target.value)}
-                                    value={item}
-                                    key={item} />
-                                {item}
-                            </label>
-                        )
-                    })}
-                </div>
 
-                <div>
-                    {leaders.map(item => {
-                        return (
-                            <label
-                                key={item.id}>
-                                <input
-                                    type="radio"
-                                    name="leader"
-                                    onChange={({ target }) => chooseLeader(target.value)}
-                                    value={JSON.stringify(item)}
-                                    key={item.id} />
-                                {item.name}
-                            </label>
-                        )
-                    })}
-                </div>
+                <Switch>
+                    <Route exact path={`${path}/new`}>
+                        {
+                            <div>
+                                <div>
+                                    {faction.map(item => {
+                                        return (
+                                            <label
+                                                key={item}>
+                                                <input
+                                                    type="radio"
+                                                    name="faction"
+                                                    onChange={({ target }) => chooseFaction(target.value)}
+                                                    value={item}
+                                                    key={item} />
+                                                {item}
+                                            </label>
+                                        )
+                                    })}
+                                </div>
+
+                                <div>
+                                    {leaders.map(item => {
+                                        return (
+                                            <label
+                                                key={item.id}>
+                                                <input
+                                                    type="radio"
+                                                    name="leader"
+                                                    onChange={({ target }) => chooseLeader(target.value)}
+                                                    value={JSON.stringify(item)}
+                                                    key={item.id} />
+                                                {item.name}
+                                            </label>
+                                        )
+                                    })}
+                                </div>
+
+                                {
+                                    deckFaction && deckLeader && <button style={closeBtn} onClick={onToggleModal}>done</button>
+                                }
+
+                                <button style={closeBtn} onClick={onCloseClick}>close</button>
+                            </div>
+                        }
+                    </Route>
+                    <Route exact path={`${path}/card`}>
+                        {
+                            <>
+                                <div>tratata</div>
+                                <button style={closeBtn} onClick={onCloseModalClick}>close</button>
+                            </>
+                        }
+                    </Route>
+
+                </Switch>
 
 
+
+
+
+                {/* <div>
+                    <div>
+                        {faction.map(item => {
+                            return (
+                                <label
+                                    key={item}>
+                                    <input
+                                        type="radio"
+                                        name="faction"
+                                        onChange={({ target }) => chooseFaction(target.value)}
+                                        value={item}
+                                        key={item} />
+                                    {item}
+                                </label>
+                            )
+                        })}
+                    </div>
+
+                    <div>
+                        {leaders.map(item => {
+                            return (
+                                <label
+                                    key={item.id}>
+                                    <input
+                                        type="radio"
+                                        name="leader"
+                                        onChange={({ target }) => chooseLeader(target.value)}
+                                        value={JSON.stringify(item)}
+                                        key={item.id} />
+                                    {item.name}
+                                </label>
+                            )
+                        })}
+                    </div>
+
+                    {
+                        deckFaction && deckLeader && <button style={closeBtn} onClick={onToggleModal}>done</button>
+                    }
+
+                    <button style={closeBtn} onClick={onCloseClick}>close</button>
+                    </div> */}
                 {/*             
                 <select value={deckFaction} name='faction' onChange={({ target }) => chooseFaction(target.value)} >
                     <option value=''>choose faction</option>
@@ -82,11 +158,10 @@ function Modal({ onToggleModal, faction, deckFaction, onSelectDeckFaction, leade
                     })}
                 </select> */}
 
-                {
-                    deckFaction && deckLeader && <button style={closeBtn} onClick={onToggleModal}>done</button>
-                }
 
-                <button style={closeBtn} onClick={onCloseClick}>close</button>
+
+
+
             </div>
         </div>
     )

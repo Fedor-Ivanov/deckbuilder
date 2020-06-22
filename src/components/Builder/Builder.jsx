@@ -59,12 +59,17 @@ function Builder({
 		onResetDeck()
 	}
 
+	function onDescriptionCardClick() {
+		onToggleModal()
+	}
+
 	return (
 		<div className='builder'>
 			<Link onClick={onNewDeckClick} to={`${url}/new`}>new deck</Link>
 			{
 				isVisible && <Modal onToggleModal={onToggleModal}></Modal>
 			}
+
 			<Switch>
 				<Route exact path={`${path}/new`}>
 					{

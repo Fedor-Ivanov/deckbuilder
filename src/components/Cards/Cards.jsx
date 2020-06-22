@@ -13,10 +13,12 @@ const Card = React.lazy(() => import('../Card/Card'));
 
 function Cards({ cards }) {
 
+
 	return (
 		<div>
 
 			<div>{cards.length}</div>
+
 
 			<div className='cards'>
 
@@ -36,6 +38,8 @@ function Cards({ cards }) {
 
 				))}
 
+
+
 			</div>
 
 		</div>
@@ -51,7 +55,7 @@ function mapStateToProps({ cards }) {
 }
 
 const mapDispatchToProps = {
-	cardsIsLoading: cardsIsLoading
+	cardsIsLoading: cardsIsLoading,
 };
 
 
