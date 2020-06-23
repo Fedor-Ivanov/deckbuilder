@@ -4,14 +4,14 @@ import { connect } from 'react-redux'
 import { cardAdd } from '../../store/actions/deck'
 import { toggleModal, openModalCard } from '../../store/actions/modal'
 
-import { useRouteMatch, Link } from 'react-router-dom';
+// import { useRouteMatch, Link } from 'react-router-dom';
 
 
 
 
 function Card({ card, onCardAdd, onToggleModal, onOpenModalCard }) {
 
-    const { path, url } = useRouteMatch();
+    // const { path, url } = useRouteMatch();
 
     function onDescriptionCardClick() {
 
@@ -123,7 +123,7 @@ function Card({ card, onCardAdd, onToggleModal, onOpenModalCard }) {
                     <img className='card-type' src={require(`../../images/trinket/trinket-stratagem.png`)} alt="" />
                 }
 
-                <Link style={description} onClick={() => onDescriptionCardClick(card)} to={`${url}/card`}>Description</Link>
+                <p style={description} onClick={() => onDescriptionCardClick(card)}>Description</p>
 
             </div>
 
@@ -148,7 +148,7 @@ const description = {
     textAlign: 'center',
     width: '100%',
     fontSize: '1rem',
-    bottom: '-20px',
+    bottom: '-35px',
     textShadow: "2px 0 0 red, -2px 0 0 red, 0 2px 0 red, 0 -2px 0 red, 1px 1px red, -1px -1px 0 red, 1px -1px 0 red, -1px 1px 0 red"
 };
 

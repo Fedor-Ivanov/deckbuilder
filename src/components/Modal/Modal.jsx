@@ -101,7 +101,7 @@ function Modal({
                     </Route>
 
                     {modalCard &&
-                        <Route path={`${path}/card`}>
+                        <Route path={`${path}`}>
                             {
                                 <>
                                     <div>{modalCard.name}</div>
@@ -112,68 +112,6 @@ function Modal({
                     }
 
                 </Switch>
-
-
-
-
-                {/* <div>
-                    <div>
-                        {faction.map(item => {
-                            return (
-                                <label
-                                    key={item}>
-                                    <input
-                                        type="radio"
-                                        name="faction"
-                                        onChange={({ target }) => chooseFaction(target.value)}
-                                        value={item}
-                                        key={item} />
-                                    {item}
-                                </label>
-                            )
-                        })}
-                    </div>
-
-                    <div>
-                        {leaders.map(item => {
-                            return (
-                                <label
-                                    key={item.id}>
-                                    <input
-                                        type="radio"
-                                        name="leader"
-                                        onChange={({ target }) => chooseLeader(target.value)}
-                                        value={JSON.stringify(item)}
-                                        key={item.id} />
-                                    {item.name}
-                                </label>
-                            )
-                        })}
-                    </div>
-
-                    {
-                        deckFaction && deckLeader && <button style={closeBtn} onClick={onToggleModal}>done</button>
-                    }
-
-                    <button style={closeBtn} onClick={onCloseClick}>close</button>
-                    </div> */}
-
-                {/* <select value={deckFaction} name='faction' onChange={({ target }) => chooseFaction(target.value)} >
-                    <option value=''>choose faction</option>
-                    {faction.map(item => {
-                        return <option key={item}>{item}</option>
-                    })}
-                </select>
-
-                <select value={deckLeader} name='leader' onChange={({ target }) => chooseLeader(target.value)} >
-                    <option value=''>choose leader</option>
-                    {leaders.map(item => {
-                        return <option value={JSON.stringify(item)} key={item.id}>{item.name}</option>
-                    })}
-                </select> */}
-
-
-
 
 
             </div>
@@ -211,7 +149,7 @@ const closeBtn = {
     marginTop: 10
 };
 
-function mapStateToProps({ filters }) {
+function mapStateToProps({ filters, modal }) {
 
     function playable(arr) {
         var array = arr;
@@ -224,6 +162,7 @@ function mapStateToProps({ filters }) {
 
     return {
 
+        modalCard: modal.modalCard,
         deckFaction: filters.deckSelect.faction,
         faction: playable(filters.faction),
         deckLeader: filters.deckSelect.leader,

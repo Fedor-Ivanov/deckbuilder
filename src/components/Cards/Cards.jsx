@@ -6,11 +6,12 @@ import './cards.css'
 import { connect } from 'react-redux'
 import LazyLoad from 'react-lazyload'
 import Modal from '../Modal/Modal'
+import ModalCardDescription from '../ModalCardDescription/ModalCardDescription'
 
 
 const Card = React.lazy(() => import('../Card/Card'));
 
-function Cards({ cards, isVisible, modalCard }) {
+function Cards({ cards, isVisible }) {
 
 	return (
 		<div>
@@ -33,7 +34,7 @@ function Cards({ cards, isVisible, modalCard }) {
 			</div>
 
 			{
-				isVisible && <Modal modalCard={modalCard}></Modal>
+				isVisible && <Modal></Modal>
 			}
 
 		</div>
@@ -46,7 +47,7 @@ function mapStateToProps({ cards, modal }) {
 	return {
 		isLoading: cards.isLoading,
 		isVisible: modal.isVisible,
-		modalCard: modal.modalCard
+
 	};
 }
 
