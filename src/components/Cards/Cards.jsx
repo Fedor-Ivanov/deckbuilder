@@ -34,7 +34,9 @@ function Cards({ cards, isVisible }) {
 			</div>
 
 			{
-				isVisible && <Modal></Modal>
+				isVisible && <Modal render={modal => (
+					<ModalCardDescription modal={modal} />
+				)}></Modal>
 			}
 
 		</div>

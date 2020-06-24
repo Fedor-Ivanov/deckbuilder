@@ -1,7 +1,6 @@
 import React from 'react'
 import './builder.css'
-import Cards from '../Cards/Cards'
-import Deck from '../Deck/Deck'
+
 import Modal from '../Modal/Modal'
 import ModalNewDeck from '../ModalNewDeck/ModalNewDeck'
 import { toggleModal } from '../../store/actions/modal'
@@ -9,6 +8,7 @@ import { resetSelectedDeck } from '../../store/actions/filters'
 import { resetDeck } from '../../store/actions/deck'
 import { Switch, Route, useRouteMatch, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import NewDeck from '../NewDeck/NewDeck'
 
 
 function Builder({
@@ -65,7 +65,9 @@ function Builder({
 			<Link onClick={onNewDeckClick} to={`${url}/new`}>new deck</Link>
 
 			{
-				isVisible && <Modal></Modal>
+				isVisible && <Modal render={modal => (
+					<ModalNewDeck modal={modal}></ModalNewDeck>
+				)} ></Modal>
 			}
 
 			<Switch>
@@ -73,12 +75,7 @@ function Builder({
 
 					{
 						selectedFaction && selectedLeader && !isVisible &&
-						<div className='wrap'>
-							<Cards className='cards' cards={finalCards}>
-							</Cards>
-							<Deck className='deck'>
-							</Deck>
-						</div>
+						<NewDeck finalCards={finalCards}></NewDeck>
 					}
 				</Route>
 			</Switch>
