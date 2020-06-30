@@ -4,15 +4,17 @@ import {
     ACTION_SET_DECK_LEADER,
     ACTION_RESET_DECK,
     ACTION_LOCK_DECK,
-    ACTION_DELETE_CARD_FROM_DECK
+    ACTION_DELETE_CARD_FROM_DECK,
+    ACTION_SET_ID_TO_DECK
 } from '../actions/deck';
 
 
 const initialState = {
+    deckId: null,
     deck: [],
     deckFaction: null,
     deckLeader: null,
-    deckLocking: false
+    deckLocking: false,
 };
 
 function checkDupl(payload) {
@@ -30,7 +32,6 @@ export default function (state = initialState, { type, payload }) {
     switch (type) {
 
         case ACTION_ADD_CARD_TO_DECK:
-
 
             return {
                 ...state,
@@ -70,6 +71,13 @@ export default function (state = initialState, { type, payload }) {
             return {
                 ...state,
                 deck: state.deck.filter(item => item.id !== payload)
+            }
+
+        case ACTION_SET_ID_TO_DECK:
+
+            return {
+                ...state,
+                deckId: Date.now()
             }
 
         default:

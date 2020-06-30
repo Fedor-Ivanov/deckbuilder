@@ -1,6 +1,5 @@
 import React, { Suspense } from 'react';
 import Filters from '../Filters/Filters'
-// import Cards from '../Cards/Cards'
 import { connect } from 'react-redux';
 
 const Cards = React.lazy(() => import('../Cards/Cards'));
@@ -39,9 +38,9 @@ function mapStateToProps({ cards, filters }) {
             return filterKeys.every(key => {
                 if (!filters[key].length) return true;
                 if (Array.isArray(product[key])) {
-                    return product[key].some(keyEle => filters[key] == keyEle);
+                    return product[key].some(keyEle => filters[key] === keyEle);
                 }
-                return filters[key] == product[key];
+                return filters[key] === product[key];
             });
         });
     };

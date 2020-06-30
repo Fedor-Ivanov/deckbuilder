@@ -1,24 +1,23 @@
 import React from 'react'
 import './builder.css'
-import Cards from '../Cards/Cards'
-import Deck from '../Deck/Deck'
-import Modal from '../Modal/Modal'
-import { toggleModal } from '../../store/actions/modal'
+import { toggleModal, openNewDeckModal } from '../../store/actions/modal'
 import { resetSelectedDeck } from '../../store/actions/filters'
 import { resetDeck } from '../../store/actions/deck'
-import { Switch, Route, useRouteMatch, Link } from 'react-router-dom';
+import { Switch, Route, useRouteMatch, Link } from 'react-router-dom'
 import { connect } from 'react-redux';
+import NewDeck from '../NewDeck/NewDeck'
 
 
 function Builder({
 	cards,
-	isVisible,
 	onToggleModal,
 	selectedFaction,
 	selectedLeader,
 	onResetSelectedDeck,
 	onResetDeck,
-	deck
+	deck,
+	onOpenNewDeckModal,
+	deckId
 }) {
 
 	const even = (element) => element.type === "Stratagem";
@@ -57,24 +56,18 @@ function Builder({
 		onResetSelectedDeck()
 		onToggleModal()
 		onResetDeck()
+		onOpenNewDeckModal()
 	}
 
 	return (
 		<div className='builder'>
 			<Link onClick={onNewDeckClick} to={`${url}/new`}>new deck</Link>
-			{
-				isVisible && <Modal onToggleModal={onToggleModal}></Modal>
-			}
+
 			<Switch>
-				<Route exact path={`${path}/new`}>
+				<Route path={`${path}/new`}>
 					{
-						selectedFaction && selectedLeader && !isVisible &&
-						<div className='wrap'>
-							<Cards className='cards' cards={finalCards}>
-							</Cards>
-							<Deck className='deck'>
-							</Deck>
-						</div>
+						selectedFaction && selectedLeader && deckId &&
+						<NewDeck finalCards={finalCards}></NewDeck>
 					}
 				</Route>
 			</Switch>
@@ -89,14 +82,16 @@ function mapStateToProps({ cards, filters, modal, deck }) {
 		isVisible: modal.isVisible,
 		selectedFaction: filters.deckSelect.faction,
 		selectedLeader: filters.deckSelect.leader,
-		deck: deck.deck
+		deck: deck.deck,
+		deckId: deck.deckId
 	};
 }
 
 const mapDispatchToProps = {
 	onToggleModal: toggleModal,
 	onResetSelectedDeck: resetSelectedDeck,
-	onResetDeck: resetDeck
+	onResetDeck: resetDeck,
+	onOpenNewDeckModal: openNewDeckModal
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Builder)

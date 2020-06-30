@@ -13,7 +13,7 @@ function Deck({ deck, deckFaction, deckLeader, isDeckLock, onDeckLock, onDeleteC
 	const deckProvision = 150 + +deckLeader.provision - cardsProvision;
 
 	const deckUnits = deck
-		.map(item => item.type == "Unit")
+		.map(item => item.type === "Unit")
 		.filter(item => item === true).length;
 
 	const deckCards = deck.length;

@@ -1,12 +1,11 @@
-.builder {
-    /* display: grid;
+/* .builder {
+    display: grid;
     grid-template-areas: 'filters filters' 'cards deck';
     grid-gap: 50px;
-    padding: 30px; */
-}
+    padding: 30px;
+} */
 
 .wrap {
     display: grid;
     grid-template-columns: 3fr 1fr;
 }
-

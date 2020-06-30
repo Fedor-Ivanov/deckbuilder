@@ -43,3 +43,10 @@ export function deleteCardFormDeck(id) {
         payload: id
     };
 }
+
+export const ACTION_SET_ID_TO_DECK = 'ACTION_SET_ID_TO_DECK';
+export function setIdToDeck() {
+    return {
+        type: ACTION_SET_ID_TO_DECK,
+    };
+}

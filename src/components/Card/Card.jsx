@@ -2,14 +2,20 @@ import React from 'react'
 import './card.css'
 import { connect } from 'react-redux'
 import { cardAdd } from '../../store/actions/deck'
+import { toggleModal, openModalCard } from '../../store/actions/modal'
 
 
+function Card({ card, onCardAdd, onToggleModal, onOpenModalCard }) {
 
-function Card({ card, onCardAdd }) {
+    function onDescriptionCardClick() {
+
+        onOpenModalCard(card)
+        onToggleModal()
+    }
 
     return (
 
-        <>
+        <div className='cardElem'>
             <div className='card' onClick={() => onCardAdd(card)}>
 
                 {/* <h1 style={header}>{card.id}</h1> */}
@@ -113,43 +119,33 @@ function Card({ card, onCardAdd }) {
 
 
 
-                <span style={description}>Description</span>
             </div>
-
-        </>
+            <p style={description} onClick={() => onDescriptionCardClick(card)}>Description</p>
+        </div>
     )
 }
 
-const header = {
-    zIndex: '10',
-    position: 'absolute',
-    color: '#fff',
-    textAlign: 'center',
-    width: '100%',
-    fontSize: '60px',
-    textShadow: "2px 0 0 red, -2px 0 0 red, 0 2px 0 red, 0 -2px 0 red, 1px 1px red, -1px -1px 0 red, 1px -1px 0 red, -1px 1px 0 red"
-};
-
 const description = {
-    zIndex: '10',
-    position: 'absolute',
     color: '#fff',
     textAlign: 'center',
     width: '100%',
     fontSize: '1rem',
-    bottom: '-20px',
+    bottom: '-35px',
     textShadow: "2px 0 0 red, -2px 0 0 red, 0 2px 0 red, 0 -2px 0 red, 1px 1px red, -1px -1px 0 red, 1px -1px 0 red, -1px 1px 0 red"
 };
 
-function mapStateToProps({ deck }) {
+function mapStateToProps({ }) {
 
     return {
-        deck: deck.deck
+
     };
 }
 
 const mapDispatchToProps = {
-    onCardAdd: cardAdd
+    onCardAdd: cardAdd,
+    onToggleModal: toggleModal,
+    onOpenModalCard: openModalCard
+
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Card)

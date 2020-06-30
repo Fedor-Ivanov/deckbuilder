@@ -1,17 +1,12 @@
 import React, { Suspense } from 'react'
 import './cards.css'
-// import Card from '../Card/Card';
-import { cardsIsLoading } from '../../store/actions/cards'
-import { connect } from 'react-redux'
 import LazyLoad from 'react-lazyload'
-
 
 
 const Card = React.lazy(() => import('../Card/Card'));
 
-
-
 function Cards({ cards }) {
+
 
 	return (
 		<div>
@@ -19,10 +14,7 @@ function Cards({ cards }) {
 			<div>{cards.length}</div>
 
 			<div className='cards'>
-
 				{cards.map(card => (
-
-
 					<Suspense key={card.id} fallback={<div>Loading...</div>}>
 						<LazyLoad key={card.id} height={400} offset={400} once>
 
@@ -33,9 +25,7 @@ function Cards({ cards }) {
 
 						</LazyLoad>
 					</Suspense>
-
 				))}
-
 			</div>
 
 		</div>
@@ -43,16 +33,4 @@ function Cards({ cards }) {
 }
 
 
-function mapStateToProps({ cards }) {
-
-	return {
-		isLoading: cards.isLoading,
-	};
-}
-
-const mapDispatchToProps = {
-	cardsIsLoading: cardsIsLoading
-};
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(Cards)
+export default Cards
