@@ -61,7 +61,6 @@ function mapStateToProps({ modal }) {
 const mapDispatchToProps = {
 
 
-
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Modal)

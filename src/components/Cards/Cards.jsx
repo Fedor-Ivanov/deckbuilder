@@ -1,7 +1,8 @@
 import React, { Suspense } from 'react'
 import './cards.css'
 import LazyLoad from 'react-lazyload'
-
+import Modal from '../Modal/Modal'
+import ModalCardDescription from '../ModalCardDescription/ModalCardDescription'
 
 const Card = React.lazy(() => import('../Card/Card'));
 
@@ -27,6 +28,12 @@ function Cards({ cards }) {
 					</Suspense>
 				))}
 			</div>
+
+			{
+				isVisible && <Modal render={modal => (
+					<ModalCardDescription modal={modal} />
+				)}></Modal>
+			}
 
 		</div>
 	)
