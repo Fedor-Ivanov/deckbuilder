@@ -4,12 +4,10 @@ import { connect } from 'react-redux'
 import { cardAdd } from '../../store/actions/deck'
 import { toggleModal, openModalCard } from '../../store/actions/modal'
 
-// import { useRouteMatch, Link } from 'react-router-dom';
 
 function Card({ card, onCardAdd, onToggleModal, onOpenModalCard }) {
 
     function onDescriptionCardClick() {
-
         onOpenModalCard(card)
         onToggleModal()
     }
@@ -18,8 +16,6 @@ function Card({ card, onCardAdd, onToggleModal, onOpenModalCard }) {
 
         <div className='cardElem'>
             <div className='card' onClick={() => onCardAdd(card)}>
-
-                {/* <h1 style={header}>{card.id}</h1> */}
 
                 {/* img */}
                 {<img className='card-img' src={require(`../../images/cards/${card.artid}.jpg`)} alt="card" />}
