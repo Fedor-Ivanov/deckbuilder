@@ -2,7 +2,7 @@ import React from 'react'
 import './deck.css'
 import { connect } from 'react-redux';
 import { deckLock, deleteCardFormDeck } from '../../store/actions/deck'
-import { saveDeck } from '../../store/actions/decks'
+import { setlocal } from '../../store/actions/decks'
 
 
 function Deck({
@@ -13,8 +13,7 @@ function Deck({
 	onDeckLock,
 	onDeleteCardFormDeck,
 	deckId,
-	saveDeck,
-	decks,
+	setlocal
 }) {
 
 	const cardsProvision = deck
@@ -44,13 +43,7 @@ function Deck({
 			leader: deckLeader,
 			cards: deck
 		}
-
-		// console.log(deckItem);
-		saveDeck(deckItem);
-
-
-		// localStorage.setItem("decksStorage", JSON.stringify(decks));
-
+		setlocal(deckItem);
 	}
 
 	return (
@@ -114,7 +107,7 @@ const deckCard = {
 	justifyContent: 'space-between'
 }
 
-function mapStateToProps({ deck, decks }) {
+function mapStateToProps({ deck }) {
 
 	return {
 		deck: deck.deck,
@@ -122,14 +115,13 @@ function mapStateToProps({ deck, decks }) {
 		deckFaction: deck.deckFaction,
 		deckLeader: deck.deckLeader,
 		isDeckLock: deck.deckLocking,
-		decks: decks.decks
 	};
 }
 
 const mapDispatchToProps = {
 	onDeckLock: deckLock,
 	onDeleteCardFormDeck: deleteCardFormDeck,
-	saveDeck: saveDeck,
+	setlocal: setlocal
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Deck)

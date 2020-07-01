@@ -6,4 +6,11 @@ export function saveDeck(deck) {
     };
 }
 
-// вот тут нужно писать санку
+export const THUNK_LOCAL_DECKS = 'THUNK_LOCAL_DECKS';
+export function setlocal(deck) {
+    return function (dispatch, getState) {
+        dispatch(saveDeck(deck));
+        const state = getState().decks.decks;
+        localStorage.setItem("decksStorage", JSON.stringify(state));
+    };
+}
