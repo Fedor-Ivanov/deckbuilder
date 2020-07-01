@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux';
 import { toggleModal } from '../../store/actions/modal'
+import Card from '../Card/Card'
 
 function ModalCardDescription({ onToggleModal, modalCard }) {
 
@@ -8,12 +9,20 @@ function ModalCardDescription({ onToggleModal, modalCard }) {
         onToggleModal()
     }
 
+    const fromModal = true;
+
     return (
         <>
             {modalCard &&
 
+
+
                 <div>
+                    <Card fromModal={fromModal} card={modalCard}></Card>
                     <div>{modalCard.name}</div>
+                    <div>{modalCard.ability}</div>
+                    <div>{modalCard.flavor}</div>
+
                     <button style={closeBtn} onClick={onCloseModalClick}>close</button>
                 </div>
 

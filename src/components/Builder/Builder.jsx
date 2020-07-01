@@ -6,6 +6,7 @@ import { resetDeck } from '../../store/actions/deck'
 import { Switch, Route, useRouteMatch, Link } from 'react-router-dom'
 import { connect } from 'react-redux';
 import NewDeck from '../NewDeck/NewDeck'
+import MyDecks from '../MyDecks/MyDecks'
 
 
 function Builder({
@@ -61,14 +62,24 @@ function Builder({
 
 	return (
 		<div className='builder'>
-			<Link onClick={onNewDeckClick} to={`${url}/new`}>new deck</Link>
+
 
 			<Switch>
+
+				<Route exact path={`${path}`}>
+					<Link onClick={onNewDeckClick} to={`${url}/new`}>new deck</Link>
+					{' '}
+					<Link to={`${url}/mydecks`}>my decks</Link>
+				</Route>
+
 				<Route path={`${path}/new`}>
 					{
 						selectedFaction && selectedLeader && deckId &&
 						<NewDeck finalCards={finalCards}></NewDeck>
 					}
+				</Route>
+				<Route path={`${path}/mydecks`}>
+					<MyDecks></MyDecks>
 				</Route>
 			</Switch>
 		</div>

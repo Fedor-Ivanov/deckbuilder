@@ -13,8 +13,8 @@ function App({ isVisible }) {
 			<Router>
 				<div>
 					<NavLink activeClassName='link_active' className='link' exact to='/'>Home</NavLink>
-					<NavLink activeClassName='link_active' className='link' exact to='/builder'>Builder</NavLink>
-					<NavLink activeClassName='link_active' className='link' exact to='/library'>Library</NavLink>
+					<NavLink activeClassName='link_active' className='link' to='/builder'>Builder</NavLink>
+					<NavLink activeClassName='link_active' className='link' to='/library'>Library</NavLink>
 				</div>
 				<Switch>
 					<Route path="/builder">

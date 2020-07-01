@@ -2,9 +2,20 @@ import React from 'react'
 import './deck.css'
 import { connect } from 'react-redux';
 import { deckLock, deleteCardFormDeck } from '../../store/actions/deck'
+import { saveDeck } from '../../store/actions/decks'
 
 
-function Deck({ deck, deckFaction, deckLeader, isDeckLock, onDeckLock, onDeleteCardFormDeck }) {
+function Deck({
+	deck,
+	deckFaction,
+	deckLeader,
+	isDeckLock,
+	onDeckLock,
+	onDeleteCardFormDeck,
+	deckId,
+	saveDeck,
+	decks,
+}) {
 
 	const cardsProvision = deck
 		.map(item => +item.provision)
@@ -26,11 +37,34 @@ function Deck({ deck, deckFaction, deckLeader, isDeckLock, onDeckLock, onDeleteC
 		onDeckLock()
 	}
 
+	function onSaveDeck() {
+		let deckItem = {
+			id: deckId,
+			faction: deckFaction,
+			leader: deckLeader,
+			cards: deck
+		}
+
+		// console.log(deckItem);
+		saveDeck(deckItem);
+
+
+		// localStorage.setItem("decksStorage", JSON.stringify(decks));
+
+	}
+
 	return (
 
 		<>
 			<div className='deck'>
 				<div className="deck__wrap">
+
+					{
+						isDeckLock && <div>go play</div>
+					}
+
+					<button onClick={onSaveDeck}>save</button>
+
 					<div>
 						<span>Faction - </span>
 						<span>{deckFaction}</span>
@@ -80,20 +114,22 @@ const deckCard = {
 	justifyContent: 'space-between'
 }
 
-
-function mapStateToProps({ deck }) {
+function mapStateToProps({ deck, decks }) {
 
 	return {
 		deck: deck.deck,
+		deckId: deck.deckId,
 		deckFaction: deck.deckFaction,
 		deckLeader: deck.deckLeader,
 		isDeckLock: deck.deckLocking,
+		decks: decks.decks
 	};
 }
 
 const mapDispatchToProps = {
 	onDeckLock: deckLock,
-	onDeleteCardFormDeck: deleteCardFormDeck
+	onDeleteCardFormDeck: deleteCardFormDeck,
+	saveDeck: saveDeck,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Deck)

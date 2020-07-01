@@ -5,17 +5,31 @@ import { cardAdd } from '../../store/actions/deck'
 import { toggleModal, openModalCard } from '../../store/actions/modal'
 
 
-function Card({ card, onCardAdd, onToggleModal, onOpenModalCard }) {
+function Card({ card, onCardAdd, onToggleModal, onOpenModalCard, fromModal }) {
 
     function onDescriptionCardClick() {
+
         onOpenModalCard(card)
         onToggleModal()
     }
 
+    function onCardClick(card) {
+        if (fromModal) {
+            return false
+        } else {
+            onCardAdd(card)
+        }
+    }
+
+
+
     return (
 
         <div className='cardElem'>
-            <div className='card' onClick={() => onCardAdd(card)}>
+
+            <div className='card' onClick={() => onCardClick(card)}>
+
+                {/* <h1 style={header}>{card.id}</h1> */}
 
                 {/* img */}
                 {<img className='card-img' src={require(`../../images/cards/${card.artid}.jpg`)} alt="card" />}
@@ -114,10 +128,10 @@ function Card({ card, onCardAdd, onToggleModal, onOpenModalCard }) {
                     <img className='card-type' src={require(`../../images/trinket/trinket-stratagem.png`)} alt="" />
                 }
 
-                <p style={description} onClick={() => onDescriptionCardClick(card)}>Description</p>
-
             </div>
-            <p style={description} onClick={() => onDescriptionCardClick(card)}>Description</p>
+
+            {!fromModal && <p style={description} onClick={() => onDescriptionCardClick(card)}>Description</p>}
+
         </div>
     )
 }
