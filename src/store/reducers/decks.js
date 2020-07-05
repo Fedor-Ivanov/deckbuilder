@@ -1,5 +1,6 @@
 import {
     ACTION_SAVE_DECK,
+    ACTION_DELETE_DECK
 } from '../actions/decks';
 
 
@@ -19,6 +20,13 @@ export default function (state = initialState, { type, payload }) {
                     payload
                 ]
             }
+
+        case ACTION_DELETE_DECK:
+
+            return {
+                ...state,
+                decks: state.decks.filter(item => item.id !== payload)
+            };
 
         default:
             return state;
