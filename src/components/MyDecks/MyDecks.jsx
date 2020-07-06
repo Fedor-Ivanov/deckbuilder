@@ -1,12 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { setLocalRemove } from '../../store/actions/decks'
+import './mydecks.css'
 
 
 function MyDecks({ decks, setLocalRemove }) {
 
     return (
-        <div>
+        <div className='wrap'>
             {decks != -[] ?
                 decks.map(deck => (
                     <div>
