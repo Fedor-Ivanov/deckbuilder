@@ -27,11 +27,12 @@ function App({ isVisible }) {
 						<h1>welcome</h1>
 					</Route>
 				</Switch>
+				{
+					isVisible && <Modal />
+				}
 			</Router>
 
-			{
-				isVisible && <Modal />
-			}
+
 
 		</>
 	)

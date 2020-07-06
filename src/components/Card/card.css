@@ -9,8 +9,8 @@
     height: 357px;
     width: 249px;
     font-family: 'gwent';
-    animation: fadeIn 0.5s ease-in forwards;
-    opacity: 0;
+    /* animation: fadeIn 0.5s ease-in forwards; */
+    /* opacity: 0; */
 }
 
 @keyframes fadeIn {

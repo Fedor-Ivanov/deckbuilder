@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { selectDeck, selectLeader, resetSelectedDeck } from '../../store/actions/filters'
 import { setDeckFaction, setDeckLeader, setIdToDeck } from '../../store/actions/deck'
 import { toggleModal } from '../../store/actions/modal'
+import { useHistory } from 'react-router-dom'
 
 function ModalNewDeck({
     onToggleModal,
@@ -19,10 +20,17 @@ function ModalNewDeck({
 }) {
 
 
+    let history = useHistory();
+
     function onCloseClick() {
         onResetSelectedDeck()
         onToggleModal()
+        history.push("/builder");
     }
+
+
+
+
 
     function chooseFaction(faction) {
         onSelectDeckFaction(faction);
@@ -36,7 +44,7 @@ function ModalNewDeck({
 
     function onDoneClick() {
         setIdToDeck();
-        onToggleModal()
+        onToggleModal();
     }
 
     return (
@@ -80,7 +88,9 @@ function ModalNewDeck({
                 </div>
             }
             {
-                deckFaction && deckLeader && <button style={closeBtn} onClick={onDoneClick}>done</button>
+                deckFaction &&
+                deckLeader &&
+                <button style={closeBtn} onClick={onDoneClick}>done</button>
             }
             <button style={closeBtn} onClick={onCloseClick}>close</button>
         </div>

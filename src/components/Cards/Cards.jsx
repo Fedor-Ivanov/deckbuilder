@@ -1,16 +1,24 @@
 import React, { Suspense, useState } from 'react'
 import './cards.css'
-// import LazyLoad from 'react-lazyload'
+import { useEffect } from 'react';
+import { connect } from 'react-redux';
 
 const Card = React.lazy(() => import('../Card/Card'));
 
 
-function Cards({ cards }) {
+function Cards({ cards, filters }) {
 
 	const [pagination, setPagination] = useState({
 		currentPage: 1,
 		itemsPerPage: 20
 	})
+
+	useEffect(() => {
+		setPagination({
+			...pagination,
+			currentPage: 1
+		})
+	}, [filters])
 
 	function changePage(direction) {
 		if (direction === 'back') {
@@ -28,24 +36,16 @@ function Cards({ cards }) {
 
 	return (
 		<div>
-
 			<div>{cards.length}</div>
-
 			<div className='cards'>
-
 				{cards.slice((pagination.currentPage * pagination.itemsPerPage) - pagination.itemsPerPage, pagination.currentPage * pagination.itemsPerPage).map(card => (
-
 					<Suspense key={card.id} fallback={<div>Loading...</div>}>
-						{/* <LazyLoad key={card.id} height={400} offset={400} once> */}
 						<Card
 							key={card.id}
 							card={card}>
 						</Card>
-						{/* </LazyLoad> */}
 					</Suspense>
-
 				))}
-
 				<div>
 					{pagination.currentPage > 1 ?
 						<button onClick={() => changePage('back')}>back</button>
@@ -55,10 +55,20 @@ function Cards({ cards }) {
 						: null}
 				</div>
 			</div>
-
 		</div>
 	)
 }
 
 
-export default Cards
+function mapStateToProps({ filters }) {
+	return {
+		filters: filters.selected
+	};
+}
+
+const mapDispatchToProps = {
+
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cards)
