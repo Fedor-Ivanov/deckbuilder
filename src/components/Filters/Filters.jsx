@@ -6,7 +6,19 @@ import { useEffect } from 'react';
 
 
 
-function Filters({ type, provision, faction, rarity, selectedType, selectedProvision, selectedFaction, selectedRarity, onSelect, onReset }) {
+function Filters({
+	type,
+	provision,
+	faction,
+	rarity,
+	selectedType,
+	selectedProvision,
+	selectedFaction,
+	selectedRarity,
+	onSelect,
+	onReset,
+	deckSelectedFaction
+}) {
 
 	let filteredProvision = provision.filter(prov => prov > 1 && prov < 15)
 
@@ -42,9 +54,15 @@ function Filters({ type, provision, faction, rarity, selectedType, selectedProvi
 			</select>
 			<select value={selectedFaction} name='faction' onChange={({ target }) => onFilterSelect(target.value, target.name)} >
 				<option value='' >All</option>
-				{faction.map(item => {
-					return <option key={item}>{item}</option>
-				})}
+				{deckSelectedFaction ?
+					<>
+						<option key={deckSelectedFaction}>{deckSelectedFaction}</option>
+						<option key={'Neutral'}>Neutral</option>
+					</>
+					:
+					faction.map(item => {
+						return <option key={item}>{item}</option>
+					})}
 			</select>
 			<select value={selectedRarity} name='rarity' onChange={({ target }) => onFilterSelect(target.value, target.name)} >
 				<option value='' >All</option>
@@ -68,9 +86,7 @@ function mapStateToProps({ filters }) {
 		selectedType: filters.selected.type,
 		selectedProvision: filters.selected.provision,
 		selectedFaction: filters.selected.faction,
-		selectedRarity: filters.selected.rarity
-
-
+		selectedRarity: filters.selected.rarity,
 	};
 }
 

@@ -18,7 +18,8 @@ function Builder({
 	onResetDeck,
 	deck,
 	onOpenNewDeckModal,
-	deckId
+	deckId,
+	filters
 }) {
 
 	const even = (element) => element.type === "Stratagem";
@@ -75,7 +76,7 @@ function Builder({
 				<Route path={`${path}/new`}>
 					{
 						selectedFaction && selectedLeader && deckId &&
-						<NewDeck finalCards={finalCards}></NewDeck>
+						<NewDeck finalCards={finalCards} selectedFaction={selectedFaction} filters={filters}></NewDeck>
 					}
 				</Route>
 				<Route path={`${path}/mydecks`}>
@@ -94,7 +95,8 @@ function mapStateToProps({ cards, filters, modal, deck }) {
 		selectedFaction: filters.deckSelect.faction,
 		selectedLeader: filters.deckSelect.leader,
 		deck: deck.deck,
-		deckId: deck.deckId
+		deckId: deck.deckId,
+		filters: filters
 	};
 }
 
