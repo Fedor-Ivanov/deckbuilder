@@ -1,6 +1,7 @@
 import {
     ACTION_SAVE_DECK,
-    ACTION_DELETE_DECK
+    ACTION_DELETE_DECK,
+    ACTION_UPDATE_DECK
 } from '../actions/decks';
 
 
@@ -9,17 +10,30 @@ const initialState = {
 };
 
 
+function updateTable(list, data) {
+
+    return list.map(item => (item.id === data.id ? data : item));
+}
+
+function createTable(list, item) {
+    return [...list, item]
+}
+
 export default function (state = initialState, { type, payload }) {
     switch (type) {
 
         case ACTION_SAVE_DECK:
 
             return {
-                decks: [
-                    ...state.decks,
-                    payload
-                ]
-            }
+                ...state,
+                decks: createTable(state.decks, payload)
+            };
+
+        case ACTION_UPDATE_DECK:
+            return {
+                ...state,
+                decks: updateTable(state.decks, payload)
+            };
 
         case ACTION_DELETE_DECK:
 

@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { setLocalRemove } from '../../store/actions/decks'
 import './mydecks.css'
+import { Link } from 'react-router-dom';
 
 
 function MyDecks({ decks, setLocalRemove }) {
@@ -10,9 +11,10 @@ function MyDecks({ decks, setLocalRemove }) {
         <div className='wrap'>
             {decks != -[] ?
                 decks.map(deck => (
-                    <div>
-                        <h1 key={deck.id}>{deck.id}</h1>
-                        <button key={deck.id} onClick={() => setLocalRemove(deck.id)}>delete deck</button>
+                    <div key={deck.id}>
+                        <h1>{deck.title}</h1>
+                        <Link to={`/builder/${deck.id}`}>edit deck</Link>
+                        <button onClick={() => setLocalRemove(deck.id)}>delete deck</button>
                         {deck.cards.map(card => (
                             <p key={card.id}>{card.name}</p>
                         ))}

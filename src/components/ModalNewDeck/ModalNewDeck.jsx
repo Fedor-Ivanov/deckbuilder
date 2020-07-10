@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux';
 import { selectDeck, selectLeader, resetSelectedDeck } from '../../store/actions/filters'
-import { setDeckFaction, setDeckLeader, setIdToDeck } from '../../store/actions/deck'
+import { setDeckFaction, setDeckLeader, setIdToDeck, setTitleDeck } from '../../store/actions/deck'
 import { toggleModal } from '../../store/actions/modal'
 import { useHistory } from 'react-router-dom'
 
@@ -16,7 +16,8 @@ function ModalNewDeck({
     onResetSelectedDeck,
     setDeckFaction,
     setDeckLeader,
-    setIdToDeck
+    setIdToDeck,
+    setTitleDeck
 }) {
 
 
@@ -27,10 +28,6 @@ function ModalNewDeck({
         onToggleModal()
         history.push("/builder");
     }
-
-
-
-
 
     function chooseFaction(faction) {
         onSelectDeckFaction(faction);
@@ -47,10 +44,17 @@ function ModalNewDeck({
         onToggleModal();
     }
 
+    function onChange({ target }) {
+        setTitleDeck(target.value)
+    }
+
     return (
 
         <div>
-            <div>
+
+            <input type='text' name='deckTitle' placeholder='title' onChange={onChange}></input>
+
+            <div style={factionIcons}>
                 {faction.map(item => {
                     return (
                         <label
@@ -62,14 +66,14 @@ function ModalNewDeck({
                                 onChange={({ target }) => chooseFaction(target.value)}
                                 value={item}
                                 key={item} />
-                            <img src={require(`../../images/fraction/${item}.png`)} alt="" />
+                            <img style={width} src={require(`../../images/fraction/${item}.png`)} alt="" />
                         </label>
                     )
                 })}
             </div>
 
             {deckFaction &&
-                <div>
+                <div style={factionIcons}>
                     {leaders.map(item => {
                         return (
                             <label
@@ -81,7 +85,7 @@ function ModalNewDeck({
                                     onChange={({ target }) => chooseLeader(target.value)}
                                     value={JSON.stringify(item)}
                                     key={item.id} />
-                                <img src={require(`../../images/leaders/${item.id}.png`)} alt="" />
+                                <img style={width} src={require(`../../images/leaders/${item.id}.png`)} alt="" />
                             </label>
                         )
                     })}
@@ -98,6 +102,14 @@ function ModalNewDeck({
     )
 }
 
+const factionIcons = {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(7, 1fr)'
+}
+
+const width = {
+    width: '100%'
+}
 
 const closeBtn = {
     backgroundColor: 'red',
@@ -137,7 +149,8 @@ const mapDispatchToProps = {
     setDeckFaction: setDeckFaction,
     setDeckLeader: setDeckLeader,
     onToggleModal: toggleModal,
-    setIdToDeck: setIdToDeck
+    setIdToDeck: setIdToDeck,
+    setTitleDeck: setTitleDeck
 
 };
 

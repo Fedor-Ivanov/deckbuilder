@@ -2,7 +2,7 @@ import React from 'react'
 import './deck.css'
 import { connect } from 'react-redux';
 import { deckLock, deleteCardFormDeck } from '../../store/actions/deck'
-import { setLocalSave } from '../../store/actions/decks'
+import { setLocalSave, setLocalUpdate } from '../../store/actions/decks'
 
 
 function Deck({
@@ -13,7 +13,10 @@ function Deck({
 	onDeckLock,
 	onDeleteCardFormDeck,
 	deckId,
-	setLocalSave
+	setLocalSave,
+	deckTitle,
+	setLocalUpdate,
+	decks
 }) {
 
 	const cardsProvision = deck
@@ -37,13 +40,37 @@ function Deck({
 	}
 
 	function onSaveDeck() {
+
 		let deckItem = {
 			id: deckId,
+			title: deckTitle,
 			faction: deckFaction,
 			leader: deckLeader,
 			cards: deck
 		}
-		setLocalSave(deckItem);
+
+		// decks.map(function (item) {
+		// 	if (item.id != deckId) {
+		// 		console.log('qwe')
+		// 		setLocalSave(deckItem)
+		// 	} else if (item.id == deckId) {
+		// 		setLocalUpdate(deckItem)
+		// 	}
+		// })
+
+		// qwe ?  : setLocalSave(deckItem);
+
+
+
+		// setLocalUpdate(deckItem) : setLocalSave(deckItem))
+
+
+
+		setLocalSave(deckItem)
+
+
+
+
 	}
 
 	return (
@@ -107,21 +134,24 @@ const deckCard = {
 	justifyContent: 'space-between'
 }
 
-function mapStateToProps({ deck }) {
+function mapStateToProps({ deck, decks }) {
 
 	return {
 		deck: deck.deck,
+		deckTitle: deck.deckTitle,
 		deckId: deck.deckId,
 		deckFaction: deck.deckFaction,
 		deckLeader: deck.deckLeader,
 		isDeckLock: deck.deckLocking,
+		decks: decks.decks
 	};
 }
 
 const mapDispatchToProps = {
 	onDeckLock: deckLock,
 	onDeleteCardFormDeck: deleteCardFormDeck,
-	setLocalSave: setLocalSave
+	setLocalSave: setLocalSave,
+	setLocalUpdate: setLocalUpdate
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Deck)

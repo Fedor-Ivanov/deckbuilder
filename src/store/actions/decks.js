@@ -6,6 +6,14 @@ export function saveDeck(deck) {
     };
 }
 
+export const ACTION_UPDATE_DECK = 'ACTION_UPDATE_DECK';
+export function updateDeck(deck) {
+    return {
+        type: ACTION_UPDATE_DECK,
+        payload: deck
+    };
+}
+
 export const ACTION_DELETE_DECK = 'ACTION_DELETE_DECK';
 export function deleteDeck(deckId) {
     return {
@@ -24,6 +32,16 @@ export function setLocalSave(deck) {
     };
 }
 
+export const THUNK_LOCAL_DECKS_UPDATE = 'THUNK_LOCAL_DECKS_UPDATE';
+export function setLocalUpdate(deck) {
+    return function (dispatch, getState) {
+        dispatch(updateDeck(deck));
+        const state = getState().decks.decks;
+        localStorage.setItem("decksStorage", JSON.stringify(state));
+    };
+}
+
+
 export const THUNK_LOCAL_DECKS_REMOVE = 'THUNK_LOCAL_DECKS_REMOVE';
 export function setLocalRemove(deckId) {
     return function (dispatch, getState) {
@@ -32,3 +50,4 @@ export function setLocalRemove(deckId) {
         localStorage.setItem("decksStorage", JSON.stringify(state));
     };
 }
+

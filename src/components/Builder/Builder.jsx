@@ -7,6 +7,7 @@ import { Switch, Route, useRouteMatch, Link } from 'react-router-dom'
 import { connect } from 'react-redux';
 import NewDeck from '../NewDeck/NewDeck'
 import MyDecks from '../MyDecks/MyDecks'
+import DeckEditor from '../DeckEditor/DeckEditor'
 
 
 function Builder({
@@ -79,9 +80,18 @@ function Builder({
 						<NewDeck finalCards={finalCards} selectedFaction={selectedFaction} filters={filters}></NewDeck>
 					}
 				</Route>
+
 				<Route path={`${path}/mydecks`}>
 					<MyDecks></MyDecks>
 				</Route>
+
+				<Route path={`${path}/:id`}
+					render={route => {
+						return <DeckEditor finalCards={finalCards} selectedFaction={selectedFaction} filters={filters} id={route.match.params.id} />
+					}}
+				>
+				</Route>
+
 			</Switch>
 		</div>
 	)
