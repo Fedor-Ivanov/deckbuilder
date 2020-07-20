@@ -49,27 +49,13 @@ function Deck({
 			cards: deck
 		}
 
-		// decks.map(function (item) {
-		// 	if (item.id != deckId) {
-		// 		console.log('qwe')
-		// 		setLocalSave(deckItem)
-		// 	} else if (item.id == deckId) {
-		// 		setLocalUpdate(deckItem)
-		// 	}
-		// })
-
-		// qwe ?  : setLocalSave(deckItem);
-
-
-
-		// setLocalUpdate(deckItem) : setLocalSave(deckItem))
-
-
-
-		setLocalSave(deckItem)
-
-
-
+		if (decks.find(deck => deck.id === deckId)) {
+			console.log('update');
+			setLocalUpdate(deckItem)
+		} else {
+			console.log('new');
+			setLocalSave(deckItem)
+		}
 
 	}
 

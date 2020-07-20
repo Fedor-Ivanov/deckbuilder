@@ -10,12 +10,12 @@ const initialState = {
 };
 
 
-function updateTable(list, data) {
+function updateDecks(list, data) {
 
     return list.map(item => (item.id === data.id ? data : item));
 }
 
-function createTable(list, item) {
+function createDeck(list, item) {
     return [...list, item]
 }
 
@@ -26,13 +26,13 @@ export default function (state = initialState, { type, payload }) {
 
             return {
                 ...state,
-                decks: createTable(state.decks, payload)
+                decks: createDeck(state.decks, payload)
             };
 
         case ACTION_UPDATE_DECK:
             return {
                 ...state,
-                decks: updateTable(state.decks, payload)
+                decks: updateDecks(state.decks, payload)
             };
 
         case ACTION_DELETE_DECK:
